@@ -1,0 +1,31 @@
+{
+  "name": "live_react",
+  "version": "0.1.0",
+  "description": "",
+  "license": "MIT",
+  "module": "./assets/js/live_react/index.js",
+  "exports": {
+    ".": "./assets/js/live_react/index.js"
+  },
+  "author": "Baptiste Chaleil <hello@mrdotb.com>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mrdotb/live_react.git"
+  },
+  "files": [
+    "README.MD",
+    "LICENSE.md",
+    "package.json",
+    "assets/js/live_react/*"
+  ],
+  "devDependencies": {
+    "prettier": "^3.3.2"
+  },
+  "scripts": {
+    "format": "npx prettier --write ."
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}
