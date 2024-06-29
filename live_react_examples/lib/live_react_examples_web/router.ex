@@ -18,6 +18,7 @@ defmodule LiveReactExamplesWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    get "/lazy", PageController, :lazy
     get "/simple", PageController, :simple
     get "/simple-props", PageController, :simple_props
     get "/typescript", PageController, :typescript

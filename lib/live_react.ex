@@ -44,7 +44,9 @@ defmodule LiveReact do
     end)
   end
 
-  defp normalize_key(key, _val) when key in ~w(id class name socket __changed__ __given__)a, do: :special
+  defp normalize_key(key, _val) when key in ~w(id class name socket __changed__ __given__)a,
+    do: :special
+
   defp normalize_key(key, val) when is_atom(key), do: key |> to_string() |> normalize_key(val)
   defp normalize_key(_key, _val), do: :props
 

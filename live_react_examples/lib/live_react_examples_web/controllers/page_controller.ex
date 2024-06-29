@@ -18,4 +18,8 @@ defmodule LiveReactExamplesWeb.PageController do
   def typescript(conn, _params) do
     render(conn, :typescript, demo: :typescript)
   end
+
+  def lazy(conn, _params) do
+    render(conn, :lazy, demo: :lazy)
+  end
 end

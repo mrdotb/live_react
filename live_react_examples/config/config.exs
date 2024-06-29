@@ -26,7 +26,17 @@ config :esbuild,
   version: "0.17.11",
   live_react_examples: [
     args:
-      ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
+      ~w(
+        js/app.js
+        --chunk-names=[name]-[hash]
+        --bundle
+        --target=es2017
+        --main-fields=module,main,exports
+        --splitting
+        --format=esm
+        --outdir=../priv/static/assets
+        --external:/fonts/* --external:/images/*
+      ),
     cd: Path.expand("../assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
