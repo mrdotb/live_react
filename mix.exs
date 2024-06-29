@@ -26,7 +26,6 @@ defmodule LiveReact.MixProject do
   defp deps do
     [
       {:jason, "~> 1.2"},
-      {:nodejs, "~> 3.1"},
       {:phoenix, ">= 1.7.0"},
       {:phoenix_html, ">= 3.3.1"},
       {:phoenix_live_view, ">= 0.18.0"},
