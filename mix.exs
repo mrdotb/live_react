@@ -39,7 +39,6 @@ defmodule LiveReact.MixProject do
       maintainers: ["Baptiste Chaleil"],
       licenses: ["MIT"],
       links: %{
-        Changelog: "",
         Github: "https://github.com/mrdotb/live_react"
       }
     ]
