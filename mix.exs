@@ -10,6 +10,7 @@ defmodule LiveReact.MixProject do
       elixir: "~> 1.16",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
+      description: "E2E reactivity for React and LiveView",
       package: package()
     ]
   end
