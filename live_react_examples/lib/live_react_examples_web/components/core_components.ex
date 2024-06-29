@@ -825,6 +825,7 @@ defmodule LiveReactExamplesWeb.CoreComponents do
 
   attr :view_type, :string, default: "LiveView"
   attr :view_url, :string, required: true
+  attr :view_language, :string, default: "heex"
   attr :raw_view_url, :string, required: true
   attr :react_url, :string, required: true
   attr :raw_react_url, :string, required: true

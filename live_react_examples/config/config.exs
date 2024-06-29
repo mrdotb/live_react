@@ -29,11 +29,11 @@ config :esbuild,
       ~w(
         js/app.js
         --chunk-names=[name]-[hash]
+        --splitting
+        --format=esm
         --bundle
         --target=es2017
         --main-fields=module,main,exports
-        --splitting
-        --format=esm
         --outdir=../priv/static/assets
         --external:/fonts/* --external:/images/*
       ),

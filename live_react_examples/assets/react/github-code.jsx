@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
+import jsx from "react-syntax-highlighter/dist/esm/languages/prism/jsx";
+import tsx from "react-syntax-highlighter/dist/esm/languages/prism/tsx";
+import elixir from "react-syntax-highlighter/dist/esm/languages/prism/elixir";
+import erb from "react-syntax-highlighter/dist/esm/languages/prism/erb";
 import { darcula } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+SyntaxHighlighter.registerLanguage("jsx", jsx);
+SyntaxHighlighter.registerLanguage("tsx", tsx);
+SyntaxHighlighter.registerLanguage("elixir", elixir);
+SyntaxHighlighter.registerLanguage("heex", erb);
 
 export function GithubCode({ url, language }) {
   const [code, setCode] = useState("");
@@ -12,7 +21,8 @@ export function GithubCode({ url, language }) {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        const text = await response.text();
+        let text = await response.text();
+        text = text.trimEnd();
         setCode(text);
       } catch (error) {
         console.error("Error fetching code:", error);
@@ -23,7 +33,7 @@ export function GithubCode({ url, language }) {
   }, []);
 
   return (
-    <SyntaxHighlighter language={language} style={darcula}>
+    <SyntaxHighlighter language={language} style={darcula} showLineNumbers>
       {code}
     </SyntaxHighlighter>
   );
