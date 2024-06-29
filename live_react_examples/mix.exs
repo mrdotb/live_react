@@ -52,7 +52,9 @@ defmodule LiveReactExamples.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.5"},
-      {:live_react, path: ".."}
+      # For development
+      # {:live_react, path: ".."}
+      {:live_react, "~> 0.1.0"}
     ]
   end
 
