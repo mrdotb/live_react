@@ -14,7 +14,7 @@ React inside Phoenix LiveView.
 
 ## Resources
 
-- [Demo](https://live-react.mrdotb.com/simple)
+- [Demo](https://live-react-examples.fly.dev/simple)
 - [HexDocs](https://hexdocs.pm/live_react)
 - [HexPackage](https://hex.pm/packages/live_react)
 - [Phoenix LiveView](https://github.com/phoenixframework/phoenix_live_view)
