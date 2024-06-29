@@ -8,16 +8,16 @@ React inside Phoenix LiveView.
 
 ## Features
 
--   ⚡ **End-To-End Reactivity** with LiveView
--   🦄 **Tailwind** Support
--   💀 **Dead View** Support
+- ⚡ **End-To-End Reactivity** with LiveView
+- 🦄 **Tailwind** Support
+- 💀 **Dead View** Support
 
 ## Resources
 
--   [Demo](https://live-react.mrdotb.com/simple)
--   [HexDocs](https://hexdocs.pm/live_react)
--   [HexPackage](https://hex.pm/packages/live_react)
--   [Phoenix LiveView](https://github.com/phoenixframework/phoenix_live_view)
+- [Demo](https://live-react.mrdotb.com/simple)
+- [HexDocs](https://hexdocs.pm/live_react)
+- [HexPackage](https://hex.pm/packages/live_react)
+- [Phoenix LiveView](https://github.com/phoenixframework/phoenix_live_view)
 
 ## Why LiveReact
 
@@ -90,12 +90,12 @@ end
 ```json
 {
   "dependencies": {
-    "live_react": "^0.1.0",
+    "@mrdotb/live-react": "^0.1.0",
     "phoenix": "file:../deps/phoenix",
     "phoenix_html": "file:../deps/phoenix_html",
     "phoenix_live_view": "file:../deps/phoenix_live_view",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react-dom": "^18.3.1"
   }
 }
 ```
