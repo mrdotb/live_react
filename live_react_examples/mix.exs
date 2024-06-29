@@ -64,9 +64,10 @@ defmodule LiveReactExamples.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      setup: ["deps.get", "assets.setup", "assets.build"],
+      setup: ["deps.get", "assets.setup", "cmd npm install --prefix assets", "assets.build"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
       "assets.build": ["tailwind live_react_examples", "esbuild live_react_examples"],
+      "esbuild.meta": ["esbuild live_react_examples --minify --metafile=meta.json"],
       "assets.deploy": [
         "tailwind live_react_examples --minify",
         "esbuild live_react_examples --minify",
