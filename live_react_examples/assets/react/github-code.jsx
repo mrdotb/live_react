@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
+import SyntaxHighlighter from "react-syntax-highlighter/dist/esm/prism-light";
 import jsx from "react-syntax-highlighter/dist/esm/languages/prism/jsx";
 import tsx from "react-syntax-highlighter/dist/esm/languages/prism/tsx";
 import elixir from "react-syntax-highlighter/dist/esm/languages/prism/elixir";
 import erb from "react-syntax-highlighter/dist/esm/languages/prism/erb";
-import { darcula } from "react-syntax-highlighter/dist/esm/styles/prism";
+import darcula from "react-syntax-highlighter/dist/esm/styles/prism/darcula";
 
 SyntaxHighlighter.registerLanguage("jsx", jsx);
 SyntaxHighlighter.registerLanguage("tsx", tsx);
