@@ -1,6 +1,13 @@
 defmodule LiveReact do
+  @moduledoc """
+  See READ.md for installation instructions and examples.
+  """
+
   use Phoenix.Component
 
+  @doc """
+  Render a React component.
+  """
   def react(assigns) do
     # we manually compute __changed__ for the computed props and slots so it's not sent without reason
     {props, props_changed?} = extract(assigns, :props)
