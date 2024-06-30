@@ -11,7 +11,8 @@ defmodule LiveReact.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       description: "E2E reactivity for React and LiveView",
-      package: package()
+      package: package(),
+      docs: docs()
     ]
   end
 
@@ -29,18 +30,28 @@ defmodule LiveReact.MixProject do
       {:phoenix, ">= 1.7.0"},
       {:phoenix_html, ">= 3.3.1"},
       {:phoenix_live_view, ">= 0.18.0"},
-      {:esbuild, "~> 0.5", only: :dev},
       {:ex_doc, "~> 0.19", only: :dev, runtime: false}
     ]
   end
 
-  def package do
+  defp package do
     [
       maintainers: ["Baptiste Chaleil"],
       licenses: ["MIT"],
       links: %{
         Github: "https://github.com/mrdotb/live_react"
       }
+    ]
+  end
+
+  defp docs do
+    [
+      name: "LiveReact",
+      source_ref: "v#{@version}",
+      source_url: "https://github.com/mrdotb/live_react",
+      homepage_url: "https://github.com/mrdotb/live_react",
+      main: "readme",
+      extras: ["README.md"]
     ]
   end
 end

@@ -143,7 +143,14 @@ content: [
 
 ```
 
+## Examples
+
+Check out the [demo website](https://live-react-examples.fly.dev/simple) on fly.io to see some examples of what you can do with LiveReact.
+
 ## Credits
 
-[LiveVue](https://github.com/Valian/live_vue)
-[LiveSvelte](https://github.com/woutdp/live_svelte)
+I was inspired by the following libraries:
+- [LiveVue](https://github.com/Valian/live_vue)
+- [LiveSvelte](https://github.com/woutdp/live_svelte)
+
+I had a need for a similar library for React and so I created LiveReact 👍
