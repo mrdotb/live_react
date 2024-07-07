@@ -25,8 +25,7 @@ config :live_react_examples, LiveReactExamplesWeb.Endpoint,
 config :esbuild,
   version: "0.17.11",
   live_react_examples: [
-    args:
-      ~w(
+    args: ~w(
         js/app.js
         --chunk-names=[name]-[hash]
         --splitting

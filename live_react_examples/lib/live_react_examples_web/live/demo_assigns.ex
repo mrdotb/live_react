@@ -20,6 +20,9 @@ defmodule LiveReactExamplesWeb.LiveDemoAssigns do
         {LiveReactExamplesWeb.LiveLogList, _} ->
           :log_list
 
+        {LiveReactExamplesWeb.LiveFlashSonner, _} ->
+          :flash_sonner
+
         {_view, _live_action} ->
           nil
       end

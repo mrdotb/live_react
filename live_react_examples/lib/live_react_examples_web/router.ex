@@ -24,6 +24,7 @@ defmodule LiveReactExamplesWeb.Router do
     get "/typescript", PageController, :typescript
     live "/live-counter", LiveCounter
     live "/log-list", LiveLogList
+    live "/flash-sonner", LiveFlashSonner
   end
 
   # Other scopes may use custom stacks.

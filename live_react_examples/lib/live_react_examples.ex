@@ -76,6 +76,16 @@ defmodule LiveReactExamples do
     }
   end
 
+  def demo(:flash_sonner) do
+    %{
+      raw_view_url: "#{@raw_url}#{@live_views}/flash_sonner.ex",
+      view_url: "#{@url}#{@live_views}/flash_sonner.ex",
+      view_language: "elixir",
+      raw_react_url: "#{@raw_url}#{@react}/flash-sonner.jsx",
+      react_url: "#{@url}#{@react}/flash-sonner.jsx"
+    }
+  end
+
   def demo(demo) do
     raise ArgumentError, "Unknown demo: #{inspect(demo)}"
   end
