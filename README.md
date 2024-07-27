@@ -6,6 +6,8 @@
 
 React inside Phoenix LiveView.
 
+![logo](https://github.com/mrdotb/live_react/blob/main/logo.svg?raw=true)
+
 ## Features
 
 - ⚡ **End-To-End Reactivity** with LiveView
@@ -150,6 +152,7 @@ Check out the [demo website](https://live-react-examples.fly.dev/simple) on fly.
 ## Credits
 
 I was inspired by the following libraries:
+
 - [LiveVue](https://github.com/Valian/live_vue)
 - [LiveSvelte](https://github.com/woutdp/live_svelte)
 
