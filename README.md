@@ -13,6 +13,7 @@ React inside Phoenix LiveView.
 - ⚡ **End-To-End Reactivity** with LiveView
 - 🦄 **Tailwind** Support
 - 💀 **Dead View** Support
+- 🐌 **Lazy-loading** React Components
 
 ## Resources
 
