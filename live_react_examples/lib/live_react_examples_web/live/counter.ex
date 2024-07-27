@@ -3,7 +3,7 @@ defmodule LiveReactExamplesWeb.LiveCounter do
 
   def render(assigns) do
     ~H"""
-    <h1 class="flex justify-center mb-10 font-bold">Hybrid: LiveView + Svelte</h1>
+    <h1 class="flex justify-center mb-10 font-bold">Hybrid: LiveView + React</h1>
     <.react name="Counter" count={@count} socket={@socket} />
     """
   end
