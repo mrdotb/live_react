@@ -240,6 +240,29 @@ defmodule LiveReactExamplesWeb.CoreComponents do
     """
   end
 
+  attr :class, :string, default: nil
+
+  attr :rest, :global,
+    include: ~w(navigate patch href replace method csrf_token),
+    doc: "the attributes to link"
+
+  slot :inner_block, required: true
+
+  def a(assigns) do
+    ~H"""
+    <a
+      class={[
+        "phx-submit-loading:opacity-75 rounded-lg bg-zinc-900 hover:bg-zinc-700 py-2 px-3",
+        "text-sm font-semibold leading-6 text-white active:text-white/80",
+        @class
+      ]}
+      {@rest}
+    >
+      <%= render_slot(@inner_block) %>
+    </a>
+    """
+  end
+
   @doc """
   Renders an input with label and error messages.
 
@@ -880,6 +903,40 @@ defmodule LiveReactExamplesWeb.CoreComponents do
         </.card>
       </.tabs_content>
     </.tabs>
+    """
+  end
+
+  attr :class, :string, default: nil
+  attr :size, :integer, default: 200
+  attr :duration, :integer, default: 15
+  attr :anchor, :integer, default: 90
+  attr :color_from, :string, default: "#ffaa40"
+  attr :color_to, :string, default: "#9c40ff"
+  attr :delay, :integer, default: 0
+
+  def border_beam(assigns) do
+    style = """
+      --size: #{assigns.size};
+      --duration: #{assigns.duration};
+      --anchor: #{assigns.anchor};
+      --border-width: 1;
+      --color-from: #{assigns.color_from};
+      --color-to: #{assigns.color_to};
+      --delay: -#{assigns.delay}s;
+    """
+
+    assigns = assign(assigns, style: style)
+
+    ~H"""
+    <div
+      style={@style}
+      class={"
+          pointer-events-none absolute inset-0 rounded-[inherit] [border:calc(var(--border-width)*1px)_solid_transparent]
+          ![mask-clip:padding-box,border-box] ![mask-composite:intersect] [mask:linear-gradient(transparent,transparent),linear-gradient(white,white)]
+          after:absolute after:aspect-square after:w-[calc(var(--size)*1px)] after:animate-border-beam after:[animation-delay:var(--delay)] after:[background:linear-gradient(to_left,var(--color-from),var(--color-to),transparent)] after:[offset-anchor:calc(var(--anchor)*1%)_50%] after:[offset-path:rect(0_auto_auto_0_round_calc(var(--size)*1px))]
+          #{@class}
+        "}
+    />
     """
   end
 
