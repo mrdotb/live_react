@@ -6,6 +6,7 @@ import { Typescript } from "./typescript";
 import { GithubCode } from "./github-code";
 import { Lazy } from "./lazy";
 import { FlashSonner } from "./flash-sonner";
+import { SSR } from "./ssr";
 
 export default {
   Simple,
@@ -16,4 +17,5 @@ export default {
   GithubCode,
   Lazy,
   FlashSonner,
+  SSR,
 };

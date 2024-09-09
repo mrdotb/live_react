@@ -30,8 +30,18 @@ export function getHooks(components) {
       }
 
       this._Component = components[componentName];
-      this._root = ReactDOM.createRoot(this.el);
-      this._render();
+
+      const isSSR = this.el.hasAttribute("data-ssr");
+
+      if (isSSR) {
+        this._root = ReactDOM.hydrateRoot(
+          this.el,
+          React.createElement(this._Component, getProps(this)),
+        );
+      } else {
+        this._root = ReactDOM.createRoot(this.el);
+        this._render();
+      }
     },
     updated() {
       if (this._root) {

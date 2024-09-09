@@ -77,6 +77,12 @@
                 >
                   Flash with sonner
                 </.link>
+                <.link
+                  class="group flex w-full items-center rounded-md border border-transparent px-2 py-1 hover:underline font-medium text-zinc-700"
+                  navigate={~p"/ssr"}
+                >
+                  SSR
+                </.link>
               </div>
             </div>
           </nav>
@@ -92,5 +98,5 @@
     </main>
   </div>
 </main>
-<.react name="FlashSonner" flash={@flash} socket={assigns[:socket]} />
+<.react :if={@demo == :flash_sonner} name="FlashSonner" flash={@flash} socket={assigns[:socket]} />
 <.flash_group flash={@flash} />

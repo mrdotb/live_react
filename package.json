@@ -1,11 +1,12 @@
 {
   "name": "@mrdotb/live-react",
-  "version": "0.1.0",
+  "version": "0.2.1-beta",
   "description": "",
   "license": "MIT",
   "module": "./assets/js/live_react/index.js",
   "exports": {
-    ".": "./assets/js/live_react/index.js"
+    ".": "./assets/js/live_react/index.mjs",
+    "./server": "./assets/js/live_react/server.mjs"
   },
   "author": "Baptiste Chaleil <hello@mrdotb.com>",
   "repository": {
@@ -24,7 +25,7 @@
   "scripts": {
     "format": "npx prettier --write ."
   },
-  "dependencies": {
+  "peerDependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   }

@@ -8,6 +8,7 @@ defmodule LiveReactExamples.Application do
   @impl true
   def start(_type, _args) do
     children = [
+      {NodeJS.Supervisor, [path: LiveReact.SSR.NodeJS.server_path(), pool_size: 4]},
       LiveReactExamplesWeb.Telemetry,
       {DNSCluster,
        query: Application.get_env(:live_react_examples, :dns_cluster_query) || :ignore},

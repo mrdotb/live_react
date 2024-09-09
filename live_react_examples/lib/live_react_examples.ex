@@ -86,6 +86,16 @@ defmodule LiveReactExamples do
     }
   end
 
+  def demo(:ssr) do
+    %{
+      raw_view_url: "#{@raw_url}#{@live_views}/ssr.ex",
+      view_url: "#{@url}#{@live_views}/ssr.ex",
+      view_language: "elixir",
+      raw_react_url: "#{@raw_url}#{@react}/ssr.jsx",
+      react_url: "#{@url}#{@react}/ssr.jsx"
+    }
+  end
+
   def demo(demo) do
     raise ArgumentError, "Unknown demo: #{inspect(demo)}"
   end
