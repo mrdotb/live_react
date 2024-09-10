@@ -22,9 +22,11 @@ defmodule LiveReactExamplesWeb.Router do
     get "/simple", PageController, :simple
     get "/simple-props", PageController, :simple_props
     get "/typescript", PageController, :typescript
+
     live "/live-counter", LiveCounter
     live "/log-list", LiveLogList
     live "/flash-sonner", LiveFlashSonner
+    live "/ssr", LiveSSR
   end
 
   # Other scopes may use custom stacks.

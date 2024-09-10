@@ -7,6 +7,9 @@
 # General application configuration
 import Config
 
+config :live_react,
+  ssr_module: LiveReact.SSR.NodeJS
+
 config :live_react_examples,
   generators: [timestamp_type: :utc_datetime]
 
@@ -24,18 +27,29 @@ config :live_react_examples, LiveReactExamplesWeb.Endpoint,
 # Configure esbuild (the version is required)
 config :esbuild,
   version: "0.17.11",
-  live_react_examples: [
+  client: [
     args: ~w(
         js/app.js
         --chunk-names=[name]-[hash]
         --splitting
         --format=esm
         --bundle
-        --target=es2017
+        --target=es2020
         --main-fields=module,main,exports
         --outdir=../priv/static/assets
         --external:/fonts/* --external:/images/*
       ),
+    cd: Path.expand("../assets", __DIR__),
+    env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
+  ],
+  server: [
+    args: ~w(
+      js/server.mjs
+      --bundle
+      --platform=node
+      --target=node19
+      --outdir=../priv/react
+    ),
     cd: Path.expand("../assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]

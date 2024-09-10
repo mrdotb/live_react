@@ -35,6 +35,7 @@ defmodule LiveReactExamples.MixProject do
       {:phoenix, "~> 1.7.14"},
       {:phoenix_html, "~> 4.1"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
+      {:nodejs, "~> 3.1"},
       # TODO bump on release to {:phoenix_live_view, "~> 1.0.0"},
       {:phoenix_live_view, "~> 1.0.0-rc.1", override: true},
       {:floki, ">= 0.30.0", only: :test},
@@ -53,8 +54,8 @@ defmodule LiveReactExamples.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.5"},
       # For development
-      # {:live_react, path: ".."}
-      {:live_react, "~> 0.1.0"}
+      {:live_react, path: ".."}
+      # {:live_react, "~> 0.1.0"}
     ]
   end
 
@@ -68,11 +69,12 @@ defmodule LiveReactExamples.MixProject do
     [
       setup: ["deps.get", "assets.setup", "cmd npm install --prefix assets", "assets.build"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
-      "assets.build": ["tailwind live_react_examples", "esbuild live_react_examples"],
-      "esbuild.meta": ["esbuild live_react_examples --minify --metafile=meta.json"],
+      "assets.build": ["tailwind live_react_examples", "esbuild client", "esbuild server"],
+      "esbuild.meta": ["esbuild client --minify --metafile=meta.json"],
       "assets.deploy": [
         "tailwind live_react_examples --minify",
-        "esbuild live_react_examples --minify",
+        "esbuild client --minify",
+        "esbuild server --minify",
         "phx.digest"
       ]
     ]

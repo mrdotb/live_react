@@ -1,7 +1,7 @@
 defmodule LiveReact.MixProject do
   use Mix.Project
 
-  @version "0.1.0"
+  @version "0.2.0-beta"
 
   def project do
     [
@@ -27,9 +27,11 @@ defmodule LiveReact.MixProject do
   defp deps do
     [
       {:jason, "~> 1.2"},
+      {:nodejs, "~> 3.1", optional: true},
       {:phoenix, ">= 1.7.0"},
       {:phoenix_html, ">= 3.3.1"},
       {:phoenix_live_view, ">= 0.18.0"},
+      {:telemetry, "~> 0.4 or ~> 1.0"},
       {:ex_doc, "~> 0.19", only: :dev, runtime: false}
     ]
   end
@@ -51,7 +53,7 @@ defmodule LiveReact.MixProject do
       source_url: "https://github.com/mrdotb/live_react",
       homepage_url: "https://github.com/mrdotb/live_react",
       main: "readme",
-      extras: ["README.md"]
+      extras: ["README.md", "guides/deployment.md", "guides/development.md", "guides/ssr.md"]
     ]
   end
 end

@@ -21,23 +21,11 @@ ARG RUNNER_IMAGE="debian:${DEBIAN_VERSION}"
 FROM ${BUILDER_IMAGE} as builder
 
 # install build dependencies
-RUN apt-get update -y && apt-get install -y build-essential git wget \
+RUN apt-get update -y && apt-get install -y build-essential git curl \
     && apt-get clean && rm -f /var/lib/apt/lists/*_*
 
-# install NVM and NODEJS
-ENV NODE_VERSION=21.6.2
-ENV NVM_DIR=/root/.nvm
-
-RUN wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-
-RUN . ${NVM_DIR}/nvm.sh \
-    && nvm install ${NODE_VERSION} \
-    && nvm alias default ${NODE_VERSION} \
-    && nvm use default
-
-# add node and npm to path so the commands are available
-ENV NODE_PATH ${NVM_DIR}/v${NODE_VERSION}/lib/node_modules
-ENV PATH ${NVM_DIR}/versions/node/v${NODE_VERSION}/bin:$PATH
+# install nodejs for build stage
+RUN curl -fsSL https://deb.nodesource.com/setup_19.x | bash - && apt-get install -y nodejs
 
 # prepare build dir
 WORKDIR /app
@@ -86,8 +74,11 @@ RUN mix release
 FROM ${RUNNER_IMAGE}
 
 RUN apt-get update -y && \
-  apt-get install -y libstdc++6 openssl libncurses5 locales ca-certificates \
+  apt-get install -y libstdc++6 openssl libncurses5 locales ca-certificates curl \
   && apt-get clean && rm -f /var/lib/apt/lists/*_*
+
+# install nodejs for production environment
+RUN curl -fsSL https://deb.nodesource.com/setup_19.x | bash - && apt-get install -y nodejs
 
 # Set the locale
 RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen

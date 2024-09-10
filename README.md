@@ -11,6 +11,7 @@ React inside Phoenix LiveView.
 ## Features
 
 - ⚡ **End-To-End Reactivity** with LiveView
+- 🔋 **Server-Side Rendered** (SSR) React
 - 🦄 **Tailwind** Support
 - 💀 **Dead View** Support
 - 🐌 **Lazy-loading** React Components
@@ -21,6 +22,9 @@ React inside Phoenix LiveView.
 - [HexDocs](https://hexdocs.pm/live_react)
 - [HexPackage](https://hex.pm/packages/live_react)
 - [Phoenix LiveView](https://github.com/phoenixframework/phoenix_live_view)
+- [Development](/guides/development.md)
+- [SSR](/guides/ssr.md)
+- [Deployment](/guides/deployment.md)
 
 ## Why LiveReact
 
@@ -37,7 +41,7 @@ LiveReact builds on top of Phoenix LiveView to allow for easy client side state 
 ```elixir
 def deps do
   [
-    {:live_react, "~> 0.1.0"}
+    {:live_react, "~> 0.2.0-beta"}
   ]
 end
 ```
@@ -93,7 +97,7 @@ end
 ```json
 {
   "dependencies": {
-    "@mrdotb/live-react": "^0.1.0",
+    "@mrdotb/live-react": "^0.2.1-beta",
     "phoenix": "file:../deps/phoenix",
     "phoenix_html": "file:../deps/phoenix_html",
     "phoenix_live_view": "file:../deps/phoenix_live_view",

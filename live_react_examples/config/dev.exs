@@ -15,7 +15,12 @@ config :live_react_examples, LiveReactExamplesWeb.Endpoint,
   debug_errors: true,
   secret_key_base: "zvJnWbYbr/b5+CzCCcin8jP0cIVLqXs6/vt2WiC5d/nVE8npISnhItLe1AIAP7Vn",
   watchers: [
-    esbuild: {Esbuild, :install_and_run, [:live_react_examples, ~w(--sourcemap=inline --watch)]},
+    client_esbuild: {Esbuild, :install_and_run, [
+      :client, ~w(--sourcemap=inline --watch),
+    ]},
+    server_esbuild: {Esbuild, :install_and_run, [
+      :server, ~w(--sourcemap=inline --watch),
+    ]},
     tailwind: {Tailwind, :install_and_run, [:live_react_examples, ~w(--watch)]}
   ]
 
@@ -44,6 +49,7 @@ config :live_react_examples, LiveReactExamplesWeb.Endpoint,
 
 # Watch static and templates for browser reloading.
 config :live_react_examples, LiveReactExamplesWeb.Endpoint,
+  reloadable_appps: [:live_react, :live_react_examples_web ,:live_react_examples],
   live_reload: [
     patterns: [
       ~r"priv/static/(?!uploads/).*(js|css|png|jpeg|jpg|gif|svg)$",
