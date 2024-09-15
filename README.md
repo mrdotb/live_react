@@ -122,7 +122,7 @@ export default {};
 ```javascript
 ...
 import components from "../react";
-import { getHooks } from "live_react";
+import { getHooks } from  "@mrdotb/live-react";
 
 const hooks = {
   ...getHooks(components),
