@@ -12,19 +12,26 @@ defmodule LiveReact.SSR.NodeJS do
   def render(name, props) do
     filename = Application.get_env(:live_react, :ssr_filepath, "./react/server.js")
 
-    try do
-      NodeJS.call!({filename, "render"}, [name, props],
-        binary: true,
-        esm: true
-      )
-    catch
-      :exit, {:noproc, _} ->
-        message = """
-        NodeJS is not configured. Please add the following to your application.ex:
-        {NodeJS.Supervisor, [path: LiveVue.SSR.NodeJS.server_path(), pool_size: 4]},
-        """
+    if Code.ensure_loaded?(NodeJS) do
+      try do
+        # Dynamically apply the NodeJS.call!/3 to avoid compiler warning
+        apply(NodeJS, :call!, [{filename, "render"}, [name, props], [binary: true, esm: true]])
+      catch
+        :exit, {:noproc, _} ->
+          message = """
+          NodeJS is not configured. Please add the following to your application.ex:
+          {NodeJS.Supervisor, [path: LiveReact.SSR.NodeJS.server_path(), pool_size: 4]},
+          """
 
-        raise %LiveReact.SSR.NotConfigured{message: message}
+          raise %LiveReact.SSR.NotConfigured{message: message}
+      end
+    else
+      message = """
+      NodeJS is not installed. Please add the following to mix.ex deps:
+      `{:nodejs, "~> 3.1"}`
+      """
+
+      raise %LiveReact.SSR.NotConfigured{message: message}
     end
   end
 
