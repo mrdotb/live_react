@@ -41,7 +41,7 @@ LiveReact builds on top of Phoenix LiveView to allow for easy client side state 
 ```elixir
 def deps do
   [
-    {:live_react, "~> 0.2.0-beta"}
+    {:live_react, "~> 0.2.0-rc.0"}
   ]
 end
 ```

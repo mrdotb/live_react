@@ -2,7 +2,7 @@ defmodule LiveReact.MixProject do
   use Mix.Project
 
   @source_url "https://github.com/mrdotb/live_react"
-  @version "0.2.0-beta"
+  @version "0.2.0-rc.0"
 
   def project do
     [
@@ -56,7 +56,13 @@ defmodule LiveReact.MixProject do
       source_url: "https://github.com/mrdotb/live_react",
       homepage_url: "https://github.com/mrdotb/live_react",
       main: "readme",
-      extras: ["README.md", "guides/deployment.md", "guides/development.md", "guides/ssr.md"]
+      extras: [
+        "README.md",
+        "guides/deployment.md",
+        "guides/development.md",
+        "guides/ssr.md",
+        "CHANGELOG.md"
+      ]
     ]
   end
 end
