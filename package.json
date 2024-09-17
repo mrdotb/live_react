@@ -1,6 +1,6 @@
 {
   "name": "@mrdotb/live-react",
-  "version": "0.2.1-beta",
+  "version": "0.2.0-rc-0",
   "description": "",
   "license": "MIT",
   "module": "./assets/js/live_react/index.js",
