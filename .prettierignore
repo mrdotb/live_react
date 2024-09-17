@@ -3,3 +3,4 @@ live_react_examples/deps/
 deps/
 doc/
 .elixir_ls
+CHANGELOG.md
