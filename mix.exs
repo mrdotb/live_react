@@ -1,6 +1,7 @@
 defmodule LiveReact.MixProject do
   use Mix.Project
 
+  @source_url "https://github.com/mrdotb/live_react"
   @version "0.2.0-beta"
 
   def project do
@@ -12,7 +13,8 @@ defmodule LiveReact.MixProject do
       deps: deps(),
       description: "E2E reactivity for React and LiveView",
       package: package(),
-      docs: docs()
+      docs: docs(),
+      source_url: @source_url
     ]
   end
 
@@ -32,7 +34,8 @@ defmodule LiveReact.MixProject do
       {:phoenix_html, ">= 3.3.1"},
       {:phoenix_live_view, ">= 0.18.0"},
       {:telemetry, "~> 0.4 or ~> 1.0"},
-      {:ex_doc, "~> 0.19", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.19", only: :dev, runtime: false},
+      {:git_ops, "~> 2.6.1", only: [:dev]}
     ]
   end
 
