@@ -15,19 +15,7 @@ config :live_react_examples, LiveReactExamplesWeb.Endpoint,
   debug_errors: true,
   secret_key_base: "zvJnWbYbr/b5+CzCCcin8jP0cIVLqXs6/vt2WiC5d/nVE8npISnhItLe1AIAP7Vn",
   watchers: [
-    client_esbuild:
-      {Esbuild, :install_and_run,
-       [
-         :client,
-         ~w(--sourcemap=inline --watch)
-       ]},
-    server_esbuild:
-      {Esbuild, :install_and_run,
-       [
-         :server,
-         ~w(--sourcemap=inline --watch)
-       ]},
-    tailwind: {Tailwind, :install_and_run, [:live_react_examples, ~w(--watch)]}
+    npm: ["run", "dev", cd: Path.expand("../assets", __DIR__)]
   ]
 
 # ## SSL Support
@@ -57,11 +45,26 @@ config :live_react_examples, LiveReactExamplesWeb.Endpoint,
 config :live_react_examples, LiveReactExamplesWeb.Endpoint,
   reloadable_appps: [:live_react, :live_react_examples_web, :live_react_examples],
   live_reload: [
+    notify: [
+      live_views: [
+        ~r"lib/live_react_examples_web/core_components.ex$",
+        ~r"lib/live_react_examples_web/(live|components)/.*(ex|heex)$"
+      ]
+    ],
     patterns: [
       ~r"priv/static/(?!uploads/).*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"lib/live_react_examples_web/(controllers|live|components)/.*(ex|heex)$"
     ]
   ]
+
+config :live_react,
+  ssr_module: LiveReact.SSR.NodeJS,
+  ssr: true
+
+# config :live_react,
+#   vite_host: "http://localhost:5173",
+#   ssr_module: LiveReact.SSR.ViteJS,
+#   ssr: true
 
 # Enable dev routes for dashboard and mailbox
 config :live_react_examples, dev_routes: true

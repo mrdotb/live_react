@@ -20,8 +20,15 @@ defmodule LiveReact.MixProject do
 
   # Run "mix help compile.app" to learn about applications.
   def application do
+    conditionals =
+      case Application.get_env(:live_react, :ssr_module) do
+        # Needed to use :httpc.request
+        LiveReact.SSR.ViteJS -> [:inets]
+        _ -> []
+      end
+
     [
-      extra_applications: [:logger]
+      extra_applications: [:logger] ++ conditionals
     ]
   end
 

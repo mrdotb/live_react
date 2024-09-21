@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
-import SyntaxHighlighter from "react-syntax-highlighter/dist/esm/prism-light";
-import jsx from "react-syntax-highlighter/dist/esm/languages/prism/jsx";
-import tsx from "react-syntax-highlighter/dist/esm/languages/prism/tsx";
-import elixir from "react-syntax-highlighter/dist/esm/languages/prism/elixir";
-import erb from "react-syntax-highlighter/dist/esm/languages/prism/erb";
-import darcula from "react-syntax-highlighter/dist/esm/styles/prism/darcula";
+import hljs from 'highlight.js/lib/core'
+import elixir from "highlight.js/lib/languages/elixir";
+import erb from "highlight.js/lib/languages/erb";
+import javascript from "highlight.js/lib/languages/javascript";
+import typescript from "highlight.js/lib/languages/typescript";
 
-SyntaxHighlighter.registerLanguage("jsx", jsx);
-SyntaxHighlighter.registerLanguage("tsx", tsx);
-SyntaxHighlighter.registerLanguage("elixir", elixir);
-SyntaxHighlighter.registerLanguage("heex", erb);
+import 'highlight.js/styles/github.css';
+
+hljs.registerLanguage('jsx', javascript);
+hljs.registerLanguage('tsx', javascript);
+hljs.registerLanguage('elixir', elixir);
+hljs.registerLanguage('heex', erb);
 
 export function GithubCode({ url, language }) {
   const [code, setCode] = useState("");
@@ -23,7 +24,8 @@ export function GithubCode({ url, language }) {
         }
         let text = await response.text();
         text = text.trimEnd();
-        setCode(text);
+        const highlightedCode = hljs.highlight(text, { language }).value;
+        setCode(highlightedCode);
       } catch (error) {
         console.error("Error fetching code:", error);
       }
@@ -33,8 +35,8 @@ export function GithubCode({ url, language }) {
   }, []);
 
   return (
-    <SyntaxHighlighter language={language} style={darcula} showLineNumbers>
-      {code}
-    </SyntaxHighlighter>
+    <pre>
+      <code dangerouslySetInnerHTML={{ __html: code }} />
+    </pre>
   );
 }

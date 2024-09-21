@@ -7,9 +7,11 @@
     <.live_title suffix=" · Phoenix Framework">
       <%= assigns[:page_title] || "LiveReactExamples" %>
     </.live_title>
-    <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
-    <script type="module" defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
-    </script>
+    <LiveReact.Reload.vite_assets assets={["/js/app.js", "/css/app.css"]}>
+      <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
+      <script type="module" phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
+      </script>
+    </LiveReact.Reload.vite_assets>
   </head>
   <body class="min-h-screen bg-background font-sans antialiased">
     <%= @inner_content %>

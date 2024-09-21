@@ -35,7 +35,7 @@ defmodule LiveReact.SSR do
   def render(name, props) do
     case Application.get_env(:live_react, :ssr_module, nil) do
       nil ->
-        %{html: ""}
+        %{preloadLinks: "", html: ""}
 
       mod ->
         meta = %{component: name, props: props}
@@ -45,7 +45,12 @@ defmodule LiveReact.SSR do
             {mod.render(name, props), meta}
           end)
 
-        %{html: body}
+        with body when is_binary(body) <- body do
+          case String.split(body, "<!-- preload -->", parts: 2) do
+            [links, html] -> %{preloadLinks: links, html: html}
+            [body] -> %{preloadLinks: "", html: body}
+          end
+        end
     end
   end
 end

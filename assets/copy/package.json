@@ -2,32 +2,26 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite --host",
+    "dev": "vite --host -l warn",
     "build": "tsc && vite build",
     "build-server": "tsc && vite build --ssr js/server.js --out-dir ../priv/react --minify esbuild --ssrManifest && echo '{\"type\": \"module\" } ' > ../priv/react/package.json"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.7",
-    "@types/react": "^18.3.8",
-    "@vitejs/plugin-react": "^4.2.1",
+    "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.12",
     "typescript": "^5.6.2",
-    "vite": "^5.2.10"
+    "vite": "^5.4.7"
   },
   "dependencies": {
-    "framer-motion": "^11.2.11",
-    "highlight.js": "^11.10.0",
     "live_react": "file:../..",
     "phoenix": "file:../deps/phoenix",
     "phoenix_html": "file:../deps/phoenix_html",
     "phoenix_live_view": "file:../deps/phoenix_live_view",
-    "prism-react-renderer": "^2.4.0",
+    "topbar": "^2.0.2",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-syntax-highlighter": "^15.5.0",
-    "sonner": "^1.5.0",
-    "topbar": "^2.0.2"
+    "react-dom": "^18.3.1"
   }
 }

@@ -24,48 +24,6 @@ config :live_react_examples, LiveReactExamplesWeb.Endpoint,
   pubsub_server: LiveReactExamples.PubSub,
   live_view: [signing_salt: "vR6Y0p5z"]
 
-# Configure esbuild (the version is required)
-config :esbuild,
-  version: "0.17.11",
-  client: [
-    args: ~w(
-        js/app.js
-        --chunk-names=[name]-[hash]
-        --splitting
-        --format=esm
-        --bundle
-        --target=es2020
-        --main-fields=module,main,exports
-        --outdir=../priv/static/assets
-        --external:/fonts/* --external:/images/*
-      ),
-    cd: Path.expand("../assets", __DIR__),
-    env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
-  ],
-  server: [
-    args: ~w(
-      js/server.mjs
-      --bundle
-      --platform=node
-      --target=node19
-      --outdir=../priv/react
-    ),
-    cd: Path.expand("../assets", __DIR__),
-    env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
-  ]
-
-# Configure tailwind (the version is required)
-config :tailwind,
-  version: "3.4.3",
-  live_react_examples: [
-    args: ~w(
-      --config=tailwind.config.js
-      --input=css/app.css
-      --output=../priv/static/assets/app.css
-    ),
-    cd: Path.expand("../assets", __DIR__)
-  ]
-
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

@@ -768,7 +768,7 @@ defmodule LiveReactExamplesWeb.CoreComponents do
 
   def card(assigns) do
     ~H"""
-    <div class={["rounded-xl border bg-card text-card-foreground shadow", @class]} {@rest}>
+    <div class={["rounded-xl border bg-card text-card-foreground shadow overflow-x-auto", @class]} {@rest}>
       <%= render_slot(@inner_block) %>
     </div>
     """

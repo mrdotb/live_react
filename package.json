@@ -1,12 +1,13 @@
 {
-  "name": "@mrdotb/live-react",
-  "version": "0.2.0-rc-0",
-  "description": "",
+  "name": "live_react",
+  "version": "0.1.0",
+  "description": "E2E reactivity from React and LiveView",
   "license": "MIT",
   "module": "./assets/js/live_react/index.js",
   "exports": {
     ".": "./assets/js/live_react/index.mjs",
-    "./server": "./assets/js/live_react/server.mjs"
+    "./server": "./assets/js/live_react/server.mjs",
+    "./vite-plugin": "./assets/js/live_react/vite-plugin.js"
   },
   "author": "Baptiste Chaleil <hello@mrdotb.com>",
   "repository": {
@@ -24,9 +25,5 @@
   },
   "scripts": {
     "format": "npx prettier --write ."
-  },
-  "peerDependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
   }
 }
