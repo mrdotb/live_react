@@ -98,9 +98,6 @@ end
 {
   "dependencies": {
     "@mrdotb/live-react": "^0.2.0-rc.0",
-    "phoenix": "file:../deps/phoenix",
-    "phoenix_html": "file:../deps/phoenix_html",
-    "phoenix_live_view": "file:../deps/phoenix_live_view",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   }
