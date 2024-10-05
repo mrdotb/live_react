@@ -17,7 +17,8 @@ In production, we'll use [elixir-nodejs](https://github.com/revelrylabs/elixir-n
 ```elixir
 def deps do
   [
-    {:live_react, "~> 0.3.0-rc.0"}
+    {:live_react, "~> 1.0.0-rc.0"},
+    {:nodejs, "~> 3.1"} # if you want to use SSR in production
   ]
 end
 ```
@@ -78,9 +79,8 @@ npm install --prefix assets
 
 ```javascript
 ...
-import "vite/modulepreload-polyfill" // required vite polyfill
 import topbar from "topbar" // instead of ../vendor/topbar
-import { getHooks } from  "live-react";
+import { getHooks } from  "live_react";
 import components from "../react";
 import "../css/app.css" // the css file is handled by vite
 
@@ -161,6 +161,8 @@ config :my_app, MyAppWeb.Endpoint,
 ```
 
 12. To make SSR working with `LiveReact.SSR.NodeJS` in production, you have to add this entry to your `application.ex` supervision tree to run the NodeJS server
+
+If you don't want SSR in production, you can skip this step.
 
 ```elixir
 children = [

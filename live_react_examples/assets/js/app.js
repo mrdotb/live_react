@@ -14,7 +14,6 @@
 //
 //     import "some-package"
 //
-import "vite/modulepreload-polyfill";
 // Include phoenix_html to handle method=PUT/DELETE in forms and buttons.
 import "phoenix_html";
 // Establish Phoenix Socket and LiveView configuration.
@@ -24,7 +23,6 @@ import topbar from "topbar";
 import components from "../react";
 import { getHooks } from "live_react";
 import "../css/app.css";
-import "vite/modulepreload-polyfill";
 
 const hooks = {
   ...getHooks(components),

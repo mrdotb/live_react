@@ -18,7 +18,7 @@
     "@types/react-dom": "^18.3.0"
   },
   "dependencies": {
-    "live_react": "file:../..",
+    "live_react": "file:../deps/live_react",
     "phoenix": "file:../deps/phoenix",
     "phoenix_html": "file:../deps/phoenix_html",
     "phoenix_live_view": "file:../deps/phoenix_live_view",
