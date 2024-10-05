@@ -16,6 +16,7 @@ export function getRender(components) {
     const componentInstance = React.createElement(Component, props);
     const content = React.createElement(Wrapper, null, componentInstance);
 
+    // https://react.dev/reference/react-dom/server/renderToString
     return renderToString(content);
   };
 }

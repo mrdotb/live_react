@@ -14,15 +14,15 @@
 //
 //     import "some-package"
 //
-
 // Include phoenix_html to handle method=PUT/DELETE in forms and buttons.
 import "phoenix_html";
 // Establish Phoenix Socket and LiveView configuration.
 import { Socket } from "phoenix";
 import { LiveSocket } from "phoenix_live_view";
-import topbar from "../vendor/topbar";
+import topbar from "topbar";
 import components from "../react";
-import { getHooks } from "@mrdotb/live-react";
+import { getHooks } from "live_react";
+import "../css/app.css";
 
 const hooks = {
   ...getHooks(components),

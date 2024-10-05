@@ -12,7 +12,7 @@ defmodule LiveReactExamplesWeb.LiveSSR do
     </a>
     <div class="flex space-x-2">
       <.react ssr={true} name="SSR" socket={@socket} text="I am rendered on Server" />
-      <.react name="SSR" socket={@socket} text="I am rendered on Client" />
+      <.react ssr={false} name="SSR" socket={@socket} text="I am rendered on Client" />
     </div>
     """
   end

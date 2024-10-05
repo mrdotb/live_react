@@ -2,7 +2,7 @@ defmodule LiveReact.MixProject do
   use Mix.Project
 
   @source_url "https://github.com/mrdotb/live_react"
-  @version "0.2.0-rc.0"
+  @version "1.0.0-rc.0"
 
   def project do
     [
@@ -20,8 +20,15 @@ defmodule LiveReact.MixProject do
 
   # Run "mix help compile.app" to learn about applications.
   def application do
+    conditionals =
+      case Application.get_env(:live_react, :ssr_module) do
+        # Needed to use :httpc.request
+        LiveReact.SSR.ViteJS -> [:inets]
+        _ -> []
+      end
+
     [
-      extra_applications: [:logger]
+      extra_applications: [:logger] ++ conditionals
     ]
   end
 
@@ -58,6 +65,7 @@ defmodule LiveReact.MixProject do
       main: "readme",
       extras: [
         "README.md",
+        "guides/installation.md",
         "guides/deployment.md",
         "guides/development.md",
         "guides/ssr.md",

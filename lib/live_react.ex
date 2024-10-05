@@ -11,13 +11,15 @@ defmodule LiveReact do
 
   require Logger
 
+  @ssr_default Application.compile_env(:live_react, :ssr, true)
+
   @doc """
   Render a React component.
   """
   def react(assigns) do
     init = assigns.__changed__ == nil
     dead = assigns[:socket] == nil or not LiveView.connected?(assigns[:socket])
-    render_ssr? = init and dead and Map.get(assigns, :ssr, false)
+    render_ssr? = init and dead and Map.get(assigns, :ssr, @ssr_default)
 
     # we manually compute __changed__ for the computed props and slots so it's not sent without reason
     {props, props_changed?} = extract(assigns, :props)

@@ -36,3 +36,4 @@ live_react_examples-*.tar
 npm-debug.log
 /assets/node_modules/
 /assets/meta.json
+/assets/tsconfig.tsbuildinfo

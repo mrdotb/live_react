@@ -1,5 +1,4 @@
 import React, { Suspense } from "react";
-import ReactDOM from "react-dom";
 const LazyComponent = React.lazy(
   () => import("./components/lazy-component.jsx"),
 );

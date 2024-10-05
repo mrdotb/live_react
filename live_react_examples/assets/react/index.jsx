@@ -1,3 +1,6 @@
+// polyfill recommended by Vite https://vitejs.dev/config/build-options#build-modulepreload
+import "vite/modulepreload-polyfill";
+
 import { Simple } from "./simple";
 import { SimpleProps } from "./simple-props";
 import { Counter } from "./counter";

@@ -39,8 +39,6 @@ defmodule LiveReactExamples.MixProject do
       # TODO bump on release to {:phoenix_live_view, "~> 1.0.0"},
       {:phoenix_live_view, "~> 1.0.0-rc.1", override: true},
       {:floki, ">= 0.30.0", only: :test},
-      {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},
-      {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
       {:heroicons,
        github: "tailwindlabs/heroicons",
        tag: "v2.1.1",
@@ -54,8 +52,8 @@ defmodule LiveReactExamples.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.5"},
       # For development
-      # {:live_react, path: ".."}
-      {:live_react, "~> 0.2.0-beta"}
+      {:live_react, path: ".."}
+      # {:live_react, "~> 0.2.0-beta"}
     ]
   end
 
@@ -67,14 +65,15 @@ defmodule LiveReactExamples.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      setup: ["deps.get", "assets.setup", "cmd npm install --prefix assets", "assets.build"],
-      "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
-      "assets.build": ["tailwind live_react_examples", "esbuild client", "esbuild server"],
-      "esbuild.meta": ["esbuild client --minify --metafile=meta.json"],
+      setup: ["deps.get", "assets.setup", "assets.build"],
+      "assets.setup": ["cmd --cd assets npm install"],
+      "assets.build": [
+        "cmd --cd assets npm run build",
+        "cmd --cd assets npm run build-server"
+      ],
       "assets.deploy": [
-        "tailwind live_react_examples --minify",
-        "esbuild client --minify",
-        "esbuild server --minify",
+        "cmd --cd assets npm run build",
+        "cmd --cd assets npm run build-server",
         "phx.digest"
       ]
     ]
