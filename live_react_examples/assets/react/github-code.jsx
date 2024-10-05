@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
-import hljs from 'highlight.js/lib/core'
+import hljs from "highlight.js/lib/core";
 import elixir from "highlight.js/lib/languages/elixir";
 import erb from "highlight.js/lib/languages/erb";
 import javascript from "highlight.js/lib/languages/javascript";
 import typescript from "highlight.js/lib/languages/typescript";
 
-import 'highlight.js/styles/github.css';
+import "highlight.js/styles/github.css";
 
-hljs.registerLanguage('jsx', javascript);
-hljs.registerLanguage('tsx', javascript);
-hljs.registerLanguage('elixir', elixir);
-hljs.registerLanguage('heex', erb);
+hljs.registerLanguage("jsx", javascript);
+hljs.registerLanguage("tsx", javascript);
+hljs.registerLanguage("elixir", elixir);
+hljs.registerLanguage("heex", erb);
 
 export function GithubCode({ url, language }) {
   const [code, setCode] = useState("");

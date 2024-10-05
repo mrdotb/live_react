@@ -1,7 +1,6 @@
 import path from "path";
 import { defineConfig } from "vite";
 
-// import react from "@vitejs/plugin-react-swc";
 import react from "@vitejs/plugin-react";
 import liveReactPlugin from "live_react/vite-plugin";
 
@@ -20,8 +19,6 @@ export default defineConfig(({ command }) => {
     },
     resolve: {
       alias: {
-        // react: path.resolve(__dirname, "node_modules/react"),
-        // "react-dom": path.resolve(__dirname, "node_modules/react-dom"),
         "@": path.resolve(__dirname, "."),
       },
     },

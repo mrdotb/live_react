@@ -83,9 +83,7 @@ function liveReactPlugin(opts = {}) {
         if (req.method == "POST" && req.url.split("?", 1)[0] === path) {
           jsonMiddleware(req, res, async () => {
             try {
-              console.log("entrypoint", entrypoint);
               const render = (await server.ssrLoadModule(entrypoint)).render;
-              console.log("render", render);
               const html = await render(req.body.name, req.body.props);
               res.end(html);
             } catch (e) {

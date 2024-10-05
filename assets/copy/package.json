@@ -4,16 +4,18 @@
   "scripts": {
     "dev": "vite --host -l warn",
     "build": "tsc && vite build",
-    "build-server": "tsc && vite build --ssr js/server.js --out-dir ../priv/react --minify esbuild --ssrManifest && echo '{\"type\": \"module\" } ' > ../priv/react/package.json"
+    "build-server": "tsc && vite build --ssr js/server.js --out-dir ../priv/react --minify esbuild && echo '{\"type\": \"module\" } ' > ../priv/react/package.json"
   },
   "devDependencies": {
-    "@tailwindcss/forms": "^0.5.7",
     "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.4.7",
+    "@tailwindcss/forms": "^0.5.7",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.12",
     "typescript": "^5.6.2",
-    "vite": "^5.4.7"
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.0"
   },
   "dependencies": {
     "live_react": "file:../..",

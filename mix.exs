@@ -65,6 +65,7 @@ defmodule LiveReact.MixProject do
       main: "readme",
       extras: [
         "README.md",
+        "guides/installation.md",
         "guides/deployment.md",
         "guides/development.md",
         "guides/ssr.md",

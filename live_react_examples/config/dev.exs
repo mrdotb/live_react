@@ -58,13 +58,9 @@ config :live_react_examples, LiveReactExamplesWeb.Endpoint,
   ]
 
 config :live_react,
-  ssr_module: LiveReact.SSR.NodeJS,
+  vite_host: "http://localhost:5173",
+  ssr_module: LiveReact.SSR.ViteJS,
   ssr: true
-
-# config :live_react,
-#   vite_host: "http://localhost:5173",
-#   ssr_module: LiveReact.SSR.ViteJS,
-#   ssr: true
 
 # Enable dev routes for dashboard and mailbox
 config :live_react_examples, dev_routes: true
