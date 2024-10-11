@@ -58,7 +58,7 @@ defp html_helpers do
 end
 ```
 
-5. LiveReact comes with a handy mix task to setup all the required files. It won't alter any files you already have in your project, you need to adjust them on your own by looking at the [sources](https://github.com/mrdotb/live_react/tree/main/assets/js/copy). Additional instructions how to adjust `package.json` can be found at the end of this page.
+5. LiveReact comes with a handy mix task to setup all the required files. It won't alter any files you already have in your project, you need to adjust them on your own by looking at the [sources](https://github.com/mrdotb/live_react/tree/main/assets/copy). Additional instructions how to adjust `package.json` can be found at the end of this page.
 
 It will create:
 
