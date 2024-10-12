@@ -5,6 +5,15 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v1.0.0-rc.1](https://github.com/mrdotb/live_react/compare/v1.0.0-rc.0...v1.0.0-rc.1) (2024-10-12)
+
+
+
+
+### Bug Fixes:
+
+* missing files in mix.exs to ship the js
+
 ## [v1.0.0-rc.0](https://github.com/mrdotb/live_react/compare/v0.2.0-rc.0...v1.0.0-rc.0) (2024-10-05)
 ### Breaking Changes:
 

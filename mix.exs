@@ -2,7 +2,7 @@ defmodule LiveReact.MixProject do
   use Mix.Project
 
   @source_url "https://github.com/mrdotb/live_react"
-  @version "1.0.0-rc.0"
+  @version "1.0.0-rc.1"
 
   def project do
     [
@@ -54,7 +54,7 @@ defmodule LiveReact.MixProject do
         Github: "https://github.com/mrdotb/live_react"
       },
       files:
-        ~w(assets/copy assets/js lib priv)s ++
+        ~w(assets/copy assets/js lib)s ++
           ~w(CHANGELOG.md LICENSE.md mix.exs package.json README.md .formatter.exs)s
     ]
   end
