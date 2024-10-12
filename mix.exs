@@ -52,7 +52,10 @@ defmodule LiveReact.MixProject do
       licenses: ["MIT"],
       links: %{
         Github: "https://github.com/mrdotb/live_react"
-      }
+      },
+      files:
+        ~w(assets/copy assets/js lib priv)s ++
+          ~w(CHANGELOG.md LICENSE.md mix.exs package.json README.md .formatter.exs)s
     ]
   end
 
