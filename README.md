@@ -1,6 +1,6 @@
 [![Hex.pm](https://img.shields.io/hexpm/v/live_react.svg)](https://hex.pm/packages/live_react)
 [![Hexdocs.pm](https://img.shields.io/badge/docs-hexdocs.pm-purple)](https://hexdocs.pm/live_react)
-[![GitHub](https://img.shields.io/github/stars/mrdotb/live_react?style=social)](https://github.com/mrdotb/live_vue)
+[![GitHub](https://img.shields.io/github/stars/mrdotb/live_react?style=social)](https://github.com/mrdotb/live_react)
 
 # LiveReact
 

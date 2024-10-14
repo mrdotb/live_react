@@ -79,7 +79,7 @@ function liveReactPlugin(opts = {}) {
       // setup SSR endpoint /ssr_render
       const path = opts.path || "/ssr_render";
       const entrypoint = opts.entrypoint || "./js/server.js";
-      server.middlewares.use(function liveVueMiddleware(req, res, next) {
+      server.middlewares.use(function liveReactMiddleware(req, res, next) {
         if (req.method == "POST" && req.url.split("?", 1)[0] === path) {
           jsonMiddleware(req, res, async () => {
             try {
