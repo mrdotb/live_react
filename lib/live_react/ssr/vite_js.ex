@@ -5,11 +5,11 @@ defmodule LiveReact.SSR.ViteJS do
   `ssr_render` is implemented as a Vite plugin. You have to add it to the `vite.config.js` plugins section.
 
   ```javascript
-  import liveReactSSRPlugin from "live_vue/vitePlugin"
+  import liveReactPlugin from "live_react/vite-plugin";
 
   {
     publicDir: "static",
-    plugins: [react(), liveVueSSRPlugin()],
+    plugins: [react(), liveReactPlugin()],
     // ...
   }
   """

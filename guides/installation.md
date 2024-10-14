@@ -216,7 +216,7 @@ npm install -D tailwindcss autoprefixer postcss @tailwindcss/forms
 npm install -D typescript @types/react @types/react-dom
 
 # runtime dependencies
-npm install --save vue topbar ../deps/live_react ../deps/phoenix ../deps/phoenix_html ../deps/phoenix_live_view
+npm install --save react react-dom topbar ../deps/live_react ../deps/phoenix ../deps/phoenix_html ../deps/phoenix_live_view
 
 # remove topbar from vendor, since we'll use it from node_modules
 rm vendor/topbar.js
