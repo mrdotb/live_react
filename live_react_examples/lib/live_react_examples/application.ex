@@ -19,6 +19,9 @@ defmodule LiveReactExamples.Application do
       LiveReactExamplesWeb.Endpoint
     ]
 
+    # Set up LiveReactExamples.Telemetry
+    LiveReactExamples.Telemetry.setup()
+
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: LiveReactExamples.Supervisor]
