@@ -4,6 +4,8 @@ _Disclaimer_ SSR for React is not a simple topic and there is a lot of issue tha
 
 ## Project setup
 
+⚠️ **Warning:** Server-side rendering (SSR) requires a Node.js worker. With a `pool_size` of 1 and the Phoenix app, you need at least **512MiB** of memory. Otherwise, the instance may experience **out-of-memory (OOM)** errors or severe slowness.
+
 SSR requires Node.js to render the javascript on server side. Add `nodejs` to your mix file.
 
 ```elixir
