@@ -10,7 +10,7 @@ defmodule LiveReact.SSR.NodeJS do
   @behaviour LiveReact.SSR
 
   def render(name, props) do
-    filename = Application.get_env(:live_react, :ssr_filepath, "./react/server.js")
+    filename = Application.get_env(:live_react, :ssr_filepath, "./react-components/server.js")
 
     if Code.ensure_loaded?(NodeJS) do
       try do

@@ -20,7 +20,7 @@ import "phoenix_html";
 import { Socket } from "phoenix";
 import { LiveSocket } from "phoenix_live_view";
 import topbar from "topbar";
-import components from "../react";
+import components from "../react-components";
 import { getHooks } from "live_react";
 import "../css/app.css";
 
