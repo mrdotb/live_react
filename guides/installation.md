@@ -81,7 +81,7 @@ npm install --prefix assets
 ...
 import topbar from "topbar" // instead of ../vendor/topbar
 import { getHooks } from  "live_react";
-import components from "../react";
+import components from "../react-components";
 import "../css/app.css" // the css file is handled by vite
 
 const hooks = {
@@ -104,8 +104,8 @@ let liveSocket = new LiveSocket("/live", Socket, {
 ```javascript
 content: [
   ...
-    "./react/**/*.jsx", // <- if you are using jsx
-    "./react/**/*.tsx" // <- if you are using tsx
+    "./react-components/**/*.jsx", // <- if you are using jsx
+    "./react-components/**/*.tsx" // <- if you are using tsx
 ],
 
 ```
@@ -231,7 +231,7 @@ and add these scripts used by watcher and `mix assets.build` command
   "scripts": {
     "dev": "vite --host -l warn",
     "build": "tsc && vite build",
-    "build-server": "tsc && vite build --ssr js/server.js --out-dir ../priv/react --minify esbuild && echo '{\"type\": \"module\" } ' > ../priv/react/package.json"
+    "build-server": "tsc && vite build --ssr js/server.js --out-dir ../priv/react-components --minify esbuild && echo '{\"type\": \"module\" } ' > ../priv/react-components/package.json"
   }
 }
 ```
