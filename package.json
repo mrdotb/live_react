@@ -1,6 +1,6 @@
 {
   "name": "live_react",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "E2E reactivity from React and LiveView",
   "license": "MIT",
   "module": "./assets/js/live_react/index.js",
@@ -21,7 +21,13 @@
     "assets/js/live_react/*"
   ],
   "devDependencies": {
-    "prettier": "^3.3.2"
+    "prettier": "^3.3.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "peerDependencies": {
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0"
   },
   "scripts": {
     "format": "npx prettier --write ."
