@@ -29,6 +29,9 @@ defmodule LiveReactExamplesWeb.LiveDemoAssigns do
         {LiveReactExamplesWeb.LiveHybridForm, _} ->
           :hybrid_form
 
+        {LiveReactExamplesWeb.LiveSlot, _} ->
+          :slot
+
         {_view, _live_action} ->
           nil
       end

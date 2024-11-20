@@ -1,26 +1,28 @@
 // polyfill recommended by Vite https://vitejs.dev/config/build-options#build-modulepreload
 import "vite/modulepreload-polyfill";
 
-import { Simple } from "./simple";
-import { SimpleProps } from "./simple-props";
 import { Counter } from "./counter";
-import { LogList } from "./log-list";
-import { Typescript } from "./typescript";
+import { DelaySlider } from "./delay-slider";
+import { FlashSonner } from "./flash-sonner";
 import { GithubCode } from "./github-code";
 import { Lazy } from "./lazy";
-import { FlashSonner } from "./flash-sonner";
+import { LogList } from "./log-list";
 import { SSR } from "./ssr";
-import { DelaySlider } from "./delay-slider";
+import { Simple } from "./simple";
+import { SimpleProps } from "./simple-props";
+import { Slot } from "./slot";
+import { Typescript } from "./typescript";
 
 export default {
-  Simple,
-  SimpleProps,
   Counter,
   DelaySlider,
-  LogList,
-  Typescript,
+  FlashSonner,
   GithubCode,
   Lazy,
-  FlashSonner,
+  LogList,
   SSR,
+  Simple,
+  SimpleProps,
+  Slot,
+  Typescript,
 };
