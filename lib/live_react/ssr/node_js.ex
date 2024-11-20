@@ -9,13 +9,17 @@ defmodule LiveReact.SSR.NodeJS do
 
   @behaviour LiveReact.SSR
 
-  def render(name, props) do
+  def render(name, props, slots) do
     filename = Application.get_env(:live_react, :ssr_filepath, "./react-components/server.js")
 
     if Code.ensure_loaded?(NodeJS) do
       try do
         # Dynamically apply the NodeJS.call!/3 to avoid compiler warning
-        apply(NodeJS, :call!, [{filename, "render"}, [name, props], [binary: true, esm: true]])
+        apply(NodeJS, :call!, [
+          {filename, "render"},
+          [name, props, slots],
+          [binary: true, esm: true]
+        ])
       catch
         :exit, {:noproc, _} ->
           message = """

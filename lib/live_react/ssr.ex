@@ -19,6 +19,7 @@ defmodule LiveReact.SSR do
 
   @type component_name :: String.t()
   @type props :: %{optional(String.t() | atom) => any}
+  @type slots :: %{optional(String.t()) => any}
 
   @typedoc """
   A render response which should have shape
@@ -29,20 +30,20 @@ defmodule LiveReact.SSR do
   """
   @type render_response :: %{optional(String.t() | atom) => any}
 
-  @callback render(component_name, props) :: render_response | no_return
+  @callback render(component_name, props, slots) :: render_response | no_return
 
-  @spec render(component_name, props) :: render_response | no_return
-  def render(name, props) do
+  @spec render(component_name, props, slots) :: render_response | no_return
+  def render(name, props, slots) do
     case Application.get_env(:live_react, :ssr_module, nil) do
       nil ->
         %{preloadLinks: "", html: ""}
 
       mod ->
-        meta = %{component: name, props: props}
+        meta = %{component: name, props: props, slots: slots}
 
         body =
           :telemetry.span([:live_react, :ssr], meta, fn ->
-            {mod.render(name, props), meta}
+            {mod.render(name, props, slots), meta}
           end)
 
         with body when is_binary(body) <- body do
