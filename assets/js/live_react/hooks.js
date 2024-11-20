@@ -6,6 +6,20 @@ function getAttributeJson(el, attributeName) {
   return data ? JSON.parse(data) : {};
 }
 
+function getChildren(hook) {
+  const dataSlots = getAttributeJson(hook.el, "data-slots");
+
+  if (!dataSlots?.default) {
+    return [];
+  }
+
+  return [
+    React.createElement("div", {
+      dangerouslySetInnerHTML: { __html: atob(dataSlots.default).trim() },
+    }),
+  ];
+}
+
 function getProps(hook) {
   return {
     ...getAttributeJson(hook.el, "data-props"),
@@ -21,7 +35,13 @@ function getProps(hook) {
 export function getHooks(components) {
   const ReactHook = {
     _render() {
-      this._root.render(React.createElement(this._Component, getProps(this)));
+      this._root.render(
+        React.createElement(
+          this._Component,
+          getProps(this),
+          ...getChildren(this),
+        ),
+      );
     },
     mounted() {
       const componentName = this.el.getAttribute("data-name");
@@ -36,7 +56,11 @@ export function getHooks(components) {
       if (isSSR) {
         this._root = ReactDOM.hydrateRoot(
           this.el,
-          React.createElement(this._Component, getProps(this)),
+          React.createElement(
+            this._Component,
+            getProps(this),
+            ...getChildren(this),
+          ),
         );
       } else {
         this._root = ReactDOM.createRoot(this.el);

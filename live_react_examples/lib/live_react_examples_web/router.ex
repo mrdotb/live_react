@@ -28,6 +28,7 @@ defmodule LiveReactExamplesWeb.Router do
     live "/flash-sonner", LiveFlashSonner
     live "/ssr", LiveSSR
     live "/hybrid-form", LiveHybridForm
+    live "/slot", LiveSlot
   end
 
   # Other scopes may use custom stacks.

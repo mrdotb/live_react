@@ -84,7 +84,11 @@ function liveReactPlugin(opts = {}) {
           jsonMiddleware(req, res, async () => {
             try {
               const render = (await server.ssrLoadModule(entrypoint)).render;
-              const html = await render(req.body.name, req.body.props);
+              const html = await render(
+                req.body.name,
+                req.body.props,
+                req.body.slots,
+              );
               res.end(html);
             } catch (e) {
               server.ssrFixStacktrace(e);

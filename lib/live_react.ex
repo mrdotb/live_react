@@ -8,6 +8,7 @@ defmodule LiveReact do
 
   alias Phoenix.LiveView
   alias LiveReact.SSR
+  alias LiveReact.Slots
 
   require Logger
 
@@ -23,6 +24,7 @@ defmodule LiveReact do
 
     # we manually compute __changed__ for the computed props and slots so it's not sent without reason
     {props, props_changed?} = extract(assigns, :props)
+    {slots, slots_changed?} = extract(assigns, :slots)
     component_name = Map.get(assigns, :name)
 
     assigns =
@@ -30,11 +32,15 @@ defmodule LiveReact do
       |> Map.put_new(:class, nil)
       |> Map.put(:__component_name, component_name)
       |> Map.put(:props, props)
-      |> Map.put(:ssr_render, if(render_ssr?, do: ssr_render(component_name, props), else: nil))
+      |> Map.put(:slots, if(slots_changed?, do: Slots.rendered_slot_map(slots), else: %{}))
+
+    assigns =
+      Map.put(assigns, :ssr_render, if(render_ssr?, do: ssr_render(assigns), else: nil))
 
     computed_changed =
       %{
         props: props_changed?,
+        slots: slots_changed?,
         ssr_render: render_ssr?
       }
 
@@ -50,6 +56,7 @@ defmodule LiveReact do
       id={assigns[:id] || id(@__component_name)}
       data-name={@__component_name}
       data-props={"#{json(@props)}"}
+      data-slots={"#{@slots |> Slots.base_encode_64 |> json}"}
       data-ssr={is_map(@ssr_render)}
       phx-update="ignore"
       phx-hook="ReactHook"
@@ -70,15 +77,18 @@ defmodule LiveReact do
   defp normalize_key(key, _val) when key in ~w(id class ssr name socket __changed__ __given__)a,
     do: :special
 
+  defp normalize_key(_key, [%{__slot__: _}]), do: :slots
   defp normalize_key(key, val) when is_atom(key), do: key |> to_string() |> normalize_key(val)
   defp normalize_key(_key, _val), do: :props
 
   defp key_changed(%{__changed__: nil}, _key), do: true
   defp key_changed(%{__changed__: changed}, key), do: changed[key] != nil
 
-  defp ssr_render(name, props) do
+  defp ssr_render(assigns) do
     try do
-      SSR.render(name, props)
+      name = Map.get(assigns, :name)
+
+      SSR.render(name, assigns.props, assigns.slots)
     rescue
       SSR.NotConfigured ->
         nil

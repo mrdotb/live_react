@@ -16,8 +16,8 @@ defmodule LiveReact.SSR.ViteJS do
 
   @behaviour LiveReact.SSR
 
-  def render(name, props) do
-    data = Jason.encode!(%{name: name, props: props})
+  def render(name, props, slots) do
+    data = Jason.encode!(%{name: name, props: props, slots: slots})
     url = vite_path("/ssr_render")
     params = {String.to_charlist(url), [], ~c"application/json", data}
 
