@@ -5,6 +5,19 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v1.0.0-rc.2](https://github.com/mrdotb/live_react/compare/v1.0.0-rc.1...v1.0.0-rc.2) (2024-12-01)
+
+
+
+
+### Features:
+
+* Added SSR duration logging to example app
+
+### Bug Fixes:
+
+* rename react folder to react-components to prevent Vite error
+
 ## [v1.0.0-rc.1](https://github.com/mrdotb/live_react/compare/v1.0.0-rc.0...v1.0.0-rc.1) (2024-10-12)
 
 
