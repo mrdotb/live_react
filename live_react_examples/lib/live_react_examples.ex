@@ -11,7 +11,7 @@ defmodule LiveReactExamples do
   @raw_url "https://raw.githubusercontent.com/mrdotb/live_react/main/live_react_examples"
   @dead_views "/lib/live_react_examples_web/controllers/page_html"
   @live_views "/lib/live_react_examples_web/live"
-  @react "/assets/react"
+  @react "/assets/react-components"
 
   def demo(name)
 
