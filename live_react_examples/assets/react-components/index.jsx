@@ -10,11 +10,13 @@ import { GithubCode } from "./github-code";
 import { Lazy } from "./lazy";
 import { FlashSonner } from "./flash-sonner";
 import { SSR } from "./ssr";
+import { DelaySlider } from "./delay-slider";
 
 export default {
   Simple,
   SimpleProps,
   Counter,
+  DelaySlider,
   LogList,
   Typescript,
   GithubCode,

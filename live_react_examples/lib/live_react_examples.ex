@@ -96,6 +96,16 @@ defmodule LiveReactExamples do
     }
   end
 
+  def demo(:hybrid_form) do
+    %{
+      raw_view_url: "#{@raw_url}#{@live_views}/hybrid_form.ex",
+      view_url: "#{@url}#{@live_views}/hybrid_form.ex",
+      view_language: "elixir",
+      raw_react_url: "#{@raw_url}#{@react}/delay-slider.tsx",
+      react_url: "#{@url}#{@react}/delay-slider.tsx"
+    }
+  end
+
   def demo(demo) do
     raise ArgumentError, "Unknown demo: #{inspect(demo)}"
   end
