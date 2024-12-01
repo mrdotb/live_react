@@ -37,7 +37,7 @@ defmodule LiveReactExamples.MixProject do
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:nodejs, "~> 3.1"},
       # TODO bump on release to {:phoenix_live_view, "~> 1.0.0"},
-      {:phoenix_live_view, "~> 1.0.0-rc.1", override: true},
+      {:phoenix_live_view, "~> 1.0.0-rc.7", override: true},
       {:floki, ">= 0.30.0", only: :test},
       {:heroicons,
        github: "tailwindlabs/heroicons",
@@ -53,7 +53,7 @@ defmodule LiveReactExamples.MixProject do
       {:bandit, "~> 1.5"},
       # For development
       {:live_react, path: ".."}
-      # {:live_react, "~> 0.2.0-beta"}
+      # {:live_react, "~> 1.0.0-rc.2"}
     ]
   end
 
