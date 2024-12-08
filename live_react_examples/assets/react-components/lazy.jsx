@@ -6,7 +6,7 @@ const LazyComponent = React.lazy(
 export function Lazy() {
   return (
     <div>
-      <h1>Hello, Esbuild with Code Splitting and Lazy Loading!</h1>
+      <h1>Hello, Vite with Code Splitting and Lazy Loading!</h1>
       <Suspense fallback={<div>Loading...</div>}>
         <LazyComponent />
       </Suspense>
