@@ -5,6 +5,13 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v1.0.0-rc.3](https://github.com/mrdotb/live_react/compare/v1.0.0-rc.2...v1.0.0-rc.3) (2024-12-08)
+
+
+### Features:
+
+* support inner_block slot
+
 ## [v1.0.0-rc.2](https://github.com/mrdotb/live_react/compare/v1.0.0-rc.1...v1.0.0-rc.2) (2024-12-01)
 
 

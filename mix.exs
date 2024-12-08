@@ -2,7 +2,7 @@ defmodule LiveReact.MixProject do
   use Mix.Project
 
   @source_url "https://github.com/mrdotb/live_react"
-  @version "1.0.0-rc.2"
+  @version "1.0.0-rc.3"
 
   def project do
     [
