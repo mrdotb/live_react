@@ -20,7 +20,11 @@ defmodule LiveReact.Reload do
       )
       |> assign(
         :javascripts,
-        for(path <- assigns.assets, String.ends_with?(path, ".js"), do: path)
+        for(
+          path <- assigns.assets,
+          String.ends_with?(path, ".js") || String.ends_with?(path, ".ts"),
+          do: path
+        )
       )
 
     # TODO - maybe make it configurable in other way than by presence of vite_host config?
