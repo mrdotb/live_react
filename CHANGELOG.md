@@ -5,6 +5,16 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v1.0.0-rc.4](https://github.com/mrdotb/live_react/compare/v1.0.0-rc.3...v1.0.0-rc.4) (2025-01-22)
+
+### Features:
+
+* add tests based on the one from live_vue
+
+### Bug Fixes:
+
+* Ensure app.ts entrypoints can be used with @react-refresh
+
 ## [v1.0.0-rc.3](https://github.com/mrdotb/live_react/compare/v1.0.0-rc.2...v1.0.0-rc.3) (2024-12-08)
 
 
