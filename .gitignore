@@ -27,3 +27,7 @@ live_react-*.tar
 
 # Ignore node_modules
 /node_modules/
+
+# LSP elixir
+.elixir_ls/
+.elixir-tools/

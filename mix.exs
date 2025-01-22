@@ -37,10 +37,12 @@ defmodule LiveReact.MixProject do
     [
       {:jason, "~> 1.2"},
       {:nodejs, "~> 3.1", optional: true},
+      {:floki, ">= 0.30.0", optional: true},
       {:phoenix, ">= 1.7.0"},
       {:phoenix_html, ">= 3.3.1"},
       {:phoenix_live_view, ">= 0.18.0"},
       {:telemetry, "~> 0.4 or ~> 1.0"},
+      {:credo, "~> 1.7", only: [:dev, :test]},
       {:ex_doc, "~> 0.19", only: :dev, runtime: false},
       {:git_ops, "~> 2.6.1", only: [:dev]}
     ]
