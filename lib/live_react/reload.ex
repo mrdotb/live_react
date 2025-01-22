@@ -27,7 +27,7 @@ defmodule LiveReact.Reload do
         )
       )
 
-    # TODO - maybe make it configurable in other way than by presence of vite_host config?
+    # maybe make it configurable in other way than by presence of vite_host config?
     # https://vitejs.dev/guide/backend-integration.html
     ~H"""
     <%= if Application.get_env(:live_react, :vite_host) do %>

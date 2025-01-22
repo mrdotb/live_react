@@ -1,0 +1,61 @@
+---
+name: Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+env:
+  MIX_ENV: test
+
+jobs:
+  code_quality_and_tests:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - elixir: 1.18.1
+            erlang: 27.2.0
+    name: Elixir v${{ matrix.elixir }}, Erlang v${{ matrix.erlang }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: erlef/setup-beam@v1
+        with:
+          otp-version: ${{ matrix.erlang }}
+          elixir-version: ${{ matrix.elixir }}
+
+      - name: Retrieve Dependencies Cache
+        uses: actions/cache@v4
+        id: mix-cache
+        with:
+          path: |
+            deps
+            _build
+          key: ${{ runner.os }}-${{ matrix.erlang }}-${{ matrix.elixir }}-mix-${{ hashFiles('**/mix.lock') }}
+
+      - name: Install Mix Dependencies
+        run: mix deps.get
+
+      - name: Check unused dependencies
+        run: mix deps.unlock --check-unused
+
+      - name: Compile dependencies
+        run: mix deps.compile
+
+      - name: Check format
+        run: mix format --check-formatted
+
+      - name: Check application compile warnings
+        run: mix compile --force --warnings-as-errors
+
+      - name: Check Credo warnings
+        run: mix credo
+
+      - name: Run tests
+        run: mix test
