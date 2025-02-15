@@ -1,8 +1,17 @@
 import React from "react";
 import { renderToString } from "react-dom/server";
+import { getComponentTree } from "./utils";
 
-function Wrapper({ children }) {
-  return React.createElement(React.Fragment, null, children);
+function getChildren(slots) {
+  if (!slots?.default) {
+    return [];
+  }
+
+  return [
+    React.createElement("div", {
+      dangerouslySetInnerHTML: { __html: slots.default.trim() },
+    }),
+  ];
 }
 
 export function getRender(components) {
@@ -11,25 +20,10 @@ export function getRender(components) {
     if (!Component) {
       throw new Error(`Component "${name}" not found`);
     }
-
-    let children = [];
-    if (slots?.default) {
-      children.push(
-        React.createElement("div", {
-          dangerouslySetInnerHTML: { __html: slots.default.trim() },
-        }),
-      );
-    }
-
-    // The Component need to be wrapped to prevent useState useEffect error which can't be root component
-    const componentInstance = React.createElement(
-      Component,
-      props,
-      ...children,
-    );
-    const content = React.createElement(Wrapper, null, componentInstance);
+    const children = getChildren(slots);
+    const tree = getComponentTree(Component, props, children);
 
     // https://react.dev/reference/react-dom/server/renderToString
-    return renderToString(content);
+    return renderToString(tree);
   };
 }

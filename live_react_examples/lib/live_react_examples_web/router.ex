@@ -24,6 +24,7 @@ defmodule LiveReactExamplesWeb.Router do
     get "/typescript", PageController, :typescript
 
     live "/live-counter", LiveCounter
+    live "/context", LiveContext
     live "/log-list", LiveLogList
     live "/flash-sonner", LiveFlashSonner
     live "/ssr", LiveSSR
