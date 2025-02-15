@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { getComponentTree } from "./utils";
 
 function getAttributeJson(el, attributeName) {
   const data = el.getAttribute(attributeName);
@@ -23,7 +24,6 @@ function getChildren(hook) {
 function getProps(hook) {
   return {
     ...getAttributeJson(hook.el, "data-props"),
-    // pass the hook callbacks to the component
     pushEvent: hook.pushEvent.bind(hook),
     pushEventTo: hook.pushEventTo.bind(hook),
     handleEvent: hook.handleEvent.bind(hook),
@@ -36,13 +36,12 @@ function getProps(hook) {
 export function getHooks(components) {
   const ReactHook = {
     _render() {
-      this._root.render(
-        React.createElement(
-          this._Component,
-          getProps(this),
-          ...getChildren(this),
-        ),
+      const tree = getComponentTree(
+        this._Component,
+        getProps(this),
+        getChildren(this),
       );
+      this._root.render(tree);
     },
     mounted() {
       const componentName = this.el.getAttribute("data-name");
@@ -55,14 +54,12 @@ export function getHooks(components) {
       const isSSR = this.el.hasAttribute("data-ssr");
 
       if (isSSR) {
-        this._root = ReactDOM.hydrateRoot(
-          this.el,
-          React.createElement(
-            this._Component,
-            getProps(this),
-            ...getChildren(this),
-          ),
+        const tree = getComponentTree(
+          this._Component,
+          getProps(this),
+          getChildren(this),
         );
+        this._root = ReactDOM.hydrateRoot(this.el, tree);
       } else {
         this._root = ReactDOM.createRoot(this.el);
         this._render();

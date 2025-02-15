@@ -32,6 +32,9 @@ defmodule LiveReactExamplesWeb.LiveDemoAssigns do
         {LiveReactExamplesWeb.LiveSlot, _} ->
           :slot
 
+        {LiveReactExamplesWeb.LiveContext, _} ->
+          :context
+
         {_view, _live_action} ->
           nil
       end
