@@ -5,7 +5,10 @@
   "license": "MIT",
   "module": "./assets/js/live_react/index.js",
   "exports": {
-    ".": "./assets/js/live_react/index.mjs",
+    ".": {
+      "import": "./assets/js/live_react/index.mjs",
+      "types": "./assets/js/live_react/index.d.mts"
+    },
     "./server": "./assets/js/live_react/server.mjs",
     "./vite-plugin": "./assets/js/live_react/vite-plugin.js"
   },

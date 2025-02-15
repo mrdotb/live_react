@@ -27,6 +27,7 @@ function getProps(hook) {
     pushEvent: hook.pushEvent.bind(hook),
     pushEventTo: hook.pushEventTo.bind(hook),
     handleEvent: hook.handleEvent.bind(hook),
+    removeHandleEvent: hook.removeHandleEvent.bind(hook),
     upload: hook.upload.bind(hook),
     uploadTo: hook.uploadTo.bind(hook),
   };

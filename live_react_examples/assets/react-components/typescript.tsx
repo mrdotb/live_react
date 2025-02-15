@@ -1,4 +1,5 @@
 import React from "react";
+import type { LiveProps } from "live_react";
 
 function MyButton({ title }: { title: string }) {
   return (
@@ -8,7 +9,9 @@ function MyButton({ title }: { title: string }) {
   );
 }
 
-export function Typescript() {
+export function Typescript(props: LiveProps) {
+  console.log(props);
+
   return (
     <div className="flex flex-col space-y-4">
       <h1>Typescript</h1>
