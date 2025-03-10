@@ -50,7 +50,6 @@ see [Installation](/guides/installation.md)
 
 ## Roadmap 🎯
 
-- [ ] Pre-build SSR components for static props
 - [ ] `useLiveForm` - an utility to efforlessly use Ecto changesets & server-side validation, similar to HEEX
 - [ ] Add support for Phoenix streams as props
 
