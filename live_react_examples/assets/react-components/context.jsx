@@ -4,7 +4,6 @@ import { useLiveReact } from "live_react";
 export function Context({ count }) {
   const [amount, setAmount] = useState(1);
   const { pushEvent, ...rest } = useLiveReact();
-  console.log(rest);
 
   return (
     <div className="flex flex-col justify-center items-center gap-4">

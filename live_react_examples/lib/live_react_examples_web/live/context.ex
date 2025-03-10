@@ -12,11 +12,6 @@ defmodule LiveReactExamplesWeb.LiveContext do
     {:ok, assign(socket, :count, 10)}
   end
 
-  # def handle_event("set_count", params, socket) do
-  #   IO.inspect(params)
-  #   {:noreply, socket}
-  # end
-
   def handle_event("set_count", %{"value" => number}, socket) do
     {:noreply, assign(socket, :count, number)}
   end

@@ -52,7 +52,8 @@ defmodule LiveReactExamples.MixProject do
       {:bandit, "~> 1.5"},
       # For development
       {:live_react, path: ".."}
-      # {:live_react, "~> 1.0.0-rc.2"}
+      # For deployment
+      # {:live_react, "~> 1.0.0"}
     ]
   end
 
