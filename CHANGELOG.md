@@ -5,6 +5,21 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v1.0.0](https://github.com/mrdotb/live_react/compare/v1.0.0...v1.0.0-rc.4) (2025-03-10)
+
+### Breaking Changes:
+
+* vitejs: switch from Mix Esbuild to Vite.js
+
+### Features:
+
+* add tests based on the one from live_vue
+* add SSR support
+* support inner_block slot
+* context provider for live_react
+* add typescript support
+
+
 ## [v1.0.0-rc.4](https://github.com/mrdotb/live_react/compare/v1.0.0-rc.3...v1.0.0-rc.4) (2025-01-22)
 
 ### Features:
