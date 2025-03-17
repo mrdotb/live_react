@@ -18,3 +18,5 @@ export interface LiveProps {
   upload: (name: string, files: FileList | File[]) => void;
   uploadTo: (target: string, name: string, files: FileList | File[]) => void;
 }
+
+export function useLiveReact(): LiveProps;
