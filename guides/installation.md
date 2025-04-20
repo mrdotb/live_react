@@ -17,7 +17,7 @@ In production, we'll use [elixir-nodejs](https://github.com/revelrylabs/elixir-n
 ```elixir
 def deps do
   [
-    {:live_react, "~> 1.0.0"},
+    {:live_react, "~> 1.0.1"},
     {:nodejs, "~> 3.1.2"} # if you want to use SSR in production
   ]
 end

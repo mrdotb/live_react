@@ -5,6 +5,13 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v1.0.1](https://github.com/mrdotb/live_react/compare/v1.0.1...v1.0.0) (2025-04-20)
+
+### Bug Fixes:
+
+* add missing useLiveReact type
+
+
 ## [v1.0.0](https://github.com/mrdotb/live_react/compare/v1.0.0...v1.0.0-rc.4) (2025-03-10)
 
 ### Breaking Changes:
