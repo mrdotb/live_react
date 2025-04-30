@@ -7,7 +7,7 @@ export function Counter({ count }) {
     <div className="flex flex-col justify-center items-center gap-4">
       <div className="flex flex-row items-center justify-center gap-10">
         <button
-          className="px-4 py-2 rounded bg-red-500 text-white"
+          className="px-4 py-2 rounded bg-red-500 text-white cursor-pointer"
           phx-click="set_count"
           value={count - amount}
         >
@@ -15,7 +15,7 @@ export function Counter({ count }) {
         </button>
         <span className="text-xl">{count}</span>
         <button
-          className="px-4 py-2 rounded bg-green-500 text-white"
+          className="px-4 py-2 rounded bg-green-500 text-white cursor-pointer"
           phx-click="set_count"
           value={count + amount}
         >

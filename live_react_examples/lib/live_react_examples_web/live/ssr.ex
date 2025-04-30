@@ -11,8 +11,20 @@ defmodule LiveReactExamplesWeb.LiveSSR do
       SSR guide
     </a>
     <div class="flex space-x-2">
-      <.react ssr={true} name="SSR" socket={@socket} text="I am rendered on Server" />
-      <.react ssr={false} name="SSR" socket={@socket} text="I am rendered on Client" />
+      <.react
+        ssr={true}
+        name="SSR"
+        socket={@socket}
+        text="I am rendered on Server"
+        class="cursor-pointer"
+      />
+      <.react
+        ssr={false}
+        name="SSR"
+        socket={@socket}
+        text="I am rendered on Client"
+        class="cursor-pointer"
+      />
     </div>
     """
   end

@@ -42,7 +42,7 @@ export const DelaySlider: React.FC<DelaySliderProps> = ({
   };
 
   return (
-    <div className="w-full space-y-8">
+    <div className="w-full flex flex-col space-y-8">
       <Label>{label}</Label>
       <DualRangeSlider
         name={inputName}

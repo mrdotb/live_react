@@ -4,10 +4,10 @@ defmodule LiveReactExamplesWeb.LiveFlashSonner do
   def render(assigns) do
     ~H"""
     <h1 class="flex justify-center mb-10 font-bold">Flash sonner</h1>
-    <.button phx-click="info">
+    <.button phx-click="info" class="cursor-pointer">
       info
     </.button>
-    <.button phx-click="error">
+    <.button phx-click="error" class="cursor-pointer">
       error
     </.button>
     """

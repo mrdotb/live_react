@@ -210,7 +210,7 @@ cd assets
 npm install -D vite @vitejs/plugin-react
 
 # tailwind
-npm install -D tailwindcss autoprefixer postcss @tailwindcss/forms
+npm install -D @tailwindcss/forms @tailwindcss/postcss @tailwindcss/vite
 
 # typescript
 npm install -D typescript @types/react @types/react-dom

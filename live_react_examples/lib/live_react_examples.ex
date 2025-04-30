@@ -121,8 +121,8 @@ defmodule LiveReactExamples do
       raw_view_url: "#{@raw_url}#{@live_views}/context.ex",
       view_url: "#{@url}#{@live_views}/context.ex",
       view_language: "elixir",
-      raw_react_url: "#{@raw_url}#{@react}/context.jsx",
-      react_url: "#{@url}#{@react}/context.jsx"
+      raw_react_url: "#{@raw_url}#{@react}/context.tsx",
+      react_url: "#{@url}#{@react}/context.tsx"
     }
   end
 

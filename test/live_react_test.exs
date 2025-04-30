@@ -90,7 +90,7 @@ defmodule LiveReactTest do
   describe "styling" do
     def styled_component(assigns) do
       ~H"""
-      <.react name="MyComponent" class="bg-blue-500 rounded" />
+      <.react name="MyComponent" class="bg-blue-500 rounded-sm" />
       """
     end
 
@@ -98,7 +98,7 @@ defmodule LiveReactTest do
       html = render_component(&styled_component/1)
       react = Test.get_react(html)
 
-      assert react.class == "bg-blue-500 rounded"
+      assert react.class == "bg-blue-500 rounded-sm"
     end
   end
 
