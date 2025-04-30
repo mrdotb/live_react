@@ -1,5 +1,6 @@
 import path from "path";
 import { defineConfig } from "vite";
+import tailwindcss from "@tailwindcss/vite";
 
 import react from "@vitejs/plugin-react";
 import liveReactPlugin from "live_react/vite-plugin";
@@ -11,7 +12,11 @@ export default defineConfig(({ command }) => {
   return {
     base: isDev ? undefined : "/assets",
     publicDir: "static",
-    plugins: [react(), liveReactPlugin()],
+    plugins: [
+      react(),
+      liveReactPlugin(),
+      tailwindcss(),
+    ],
     ssr: {
       // we need it, because in SSR build we want no external
       // and in dev, we want external for fast updates

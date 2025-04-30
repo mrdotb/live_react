@@ -710,7 +710,7 @@ defmodule LiveReactExamplesWeb.CoreComponents do
     <button
       class={[
         "tabs-trigger",
-        "inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm",
+        "inline-flex w-full items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm cursor-pointer",
         @class
       ]}
       data-target={@value}
@@ -769,7 +769,7 @@ defmodule LiveReactExamplesWeb.CoreComponents do
   def card(assigns) do
     ~H"""
     <div
-      class={["rounded-xl border bg-card text-card-foreground shadow overflow-x-auto", @class]}
+      class={["rounded-xl border-sm bg-card text-card-foreground shadow-sm overflow-x-auto", @class]}
       {@rest}
     >
       {render_slot(@inner_block)}

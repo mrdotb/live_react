@@ -43,7 +43,7 @@ export function LogList({ pushEvent, handleEvent }) {
           />
           <button
             type="submit"
-            className="bg-black rounded text-white px-2 py-1 font-bold"
+            className="bg-black rounded text-white px-2 py-1 font-bold cursor-pointer"
             onClick={addItem}
           >
             Add item
@@ -51,7 +51,7 @@ export function LogList({ pushEvent, handleEvent }) {
         </form>
         <button
           type="submit"
-          className="bg-black rounded text-white px-2 py-1 font-bold"
+          className="bg-black rounded text-white px-2 py-1 font-bold cursor-pointer"
           onClick={resetItems}
         >
           Reset items

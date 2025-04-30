@@ -6,7 +6,7 @@ defmodule LiveReactExamplesWeb.LiveSlot do
     <h1 class="flex justify-center mb-10 font-bold">Slot</h1>
     <.react name="Slot" socket={@socket} ssr={true}>
       <div>button component passed as a slot and rendered</div>
-      <.button>
+      <.button class="cursor-pointer">
         button
       </.button>
     </.react>

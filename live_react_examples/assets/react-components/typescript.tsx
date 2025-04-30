@@ -3,7 +3,7 @@ import type { LiveProps } from "live_react";
 
 function MyButton({ title }: { title: string }) {
   return (
-    <button className="bg-indigo-500 py-2 px-3 rounded text-white">
+    <button className="bg-indigo-500 py-2 px-3 rounded text-white cursor-pointer">
       {title}
     </button>
   );
