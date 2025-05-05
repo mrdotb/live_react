@@ -1,3 +1,6 @@
+import React from "react";
+import { ViewHookInterface } from "phoenix_live_view";
+
 export interface LiveProps {
   pushEvent: (
     event: string,
@@ -20,3 +23,17 @@ export interface LiveProps {
 }
 
 export function useLiveReact(): LiveProps;
+
+interface ReactHookType {
+  _render: () => void;
+  mounted: () => void;
+  updated: () => void;
+  destroyed: () => void;
+}
+
+/**
+ * Creates React hook handlers for Phoenix LiveView
+ */
+export function getHooks(components: Record<string, React.ComponentType<any>>): {
+  ReactHook: ReactHookType;
+};
