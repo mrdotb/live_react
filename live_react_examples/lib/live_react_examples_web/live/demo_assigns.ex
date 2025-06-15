@@ -35,6 +35,12 @@ defmodule LiveReactExamplesWeb.LiveDemoAssigns do
         {LiveReactExamplesWeb.LiveContext, _} ->
           :context
 
+        {LiveReactExamplesWeb.LiveLinkDemo, _} ->
+          :link_demo
+
+        {LiveReactExamplesWeb.LiveLinkUsage, _} ->
+          :link_usage
+
         {_view, _live_action} ->
           nil
       end
