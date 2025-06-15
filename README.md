@@ -17,6 +17,7 @@ React inside Phoenix LiveView.
 - 💀 **Dead View** Support
 - 🐌 **Lazy-loading** React Components
 - 🦥 **Slot** Interoperability
+- 🔗 **Link Component** for LiveView Navigation
 - 🚀 **Amazing DX** with Vite
 
 ## Resources

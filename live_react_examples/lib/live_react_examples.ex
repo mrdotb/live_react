@@ -126,6 +126,26 @@ defmodule LiveReactExamples do
     }
   end
 
+  def demo(:link_demo) do
+    %{
+      raw_view_url: "#{@raw_url}#{@live_views}/link_demo.ex",
+      view_url: "#{@url}#{@live_views}/link_demo.ex",
+      view_language: "elixir",
+      raw_react_url: "#{@raw_url}#{@react}/link-example.jsx",
+      react_url: "#{@url}#{@react}/link-example.jsx"
+    }
+  end
+
+  def demo(:link_usage) do
+    %{
+      raw_view_url: "#{@raw_url}#{@live_views}/link_usage.ex",
+      view_url: "#{@url}#{@live_views}/link_usage.ex",
+      view_language: "elixir",
+      raw_react_url: "#{@raw_url}#{@react}/link.jsx",
+      react_url: "#{@url}#{@react}/link.jsx"
+    }
+  end
+
   def demo(demo) do
     raise ArgumentError, "Unknown demo: #{inspect(demo)}"
   end
