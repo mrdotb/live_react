@@ -30,6 +30,8 @@ defmodule LiveReactExamplesWeb.Router do
     live "/ssr", LiveSSR
     live "/hybrid-form", LiveHybridForm
     live "/slot", LiveSlot
+    live "/link-demo", LiveLinkDemo
+    live "/link-usage", LiveLinkUsage
   end
 
   # Other scopes may use custom stacks.
