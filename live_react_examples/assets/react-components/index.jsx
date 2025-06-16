@@ -7,6 +7,8 @@ import { DelaySlider } from "./delay-slider";
 import { FlashSonner } from "./flash-sonner";
 import { GithubCode } from "./github-code";
 import { Lazy } from "./lazy";
+import { Link } from "./link";
+import { LinkExample } from "./link-example";
 import { LogList } from "./log-list";
 import { SSR } from "./ssr";
 import { Simple } from "./simple";
@@ -21,6 +23,8 @@ export default {
   FlashSonner,
   GithubCode,
   Lazy,
+  Link,
+  LinkExample,
   LogList,
   SSR,
   Simple,

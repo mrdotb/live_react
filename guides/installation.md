@@ -178,6 +178,32 @@ children = [
 <.react name="Simple" />
 ```
 
+You can also use the built-in Link component for LiveView navigation:
+
+```elixir
+<!-- Use Link component directly in templates -->
+<.react name="Link" href="/some-page">External Link</.react>
+<.react name="Link" patch="/current-liveview?tab=new">Patch Link</.react>
+<.react name="Link" navigate="/other-liveview">Navigate Link</.react>
+
+<!-- Or import it in your React components -->
+```
+
+```javascript
+import { Link } from "live_react";
+
+function MyComponent() {
+  return (
+    <div>
+      <Link href="/external">Traditional Link</Link>
+      <Link patch="/same-lv?param=value">Patch Current LiveView</Link>
+      <Link navigate="/other-lv">Navigate to Other LiveView</Link>
+      <Link navigate="/replace" replace={true}>Replace History</Link>
+    </div>
+  );
+}
+```
+
 14. (Optional) enable [stateful hot reload](https://twitter.com/jskalc/status/1788308446007132509) of phoenix LiveViews - it allows for stateful reload across the whole stack 🤯. Just adjust your `dev.exs` to look like this - add `notify` section and remove `live|components` from patterns.
 
 ```elixir
