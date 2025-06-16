@@ -114,10 +114,10 @@ defmodule LiveReactExamplesWeb.LiveLinkUsage do
         <.react
           name="Link"
           navigate="/link-demo"
-          className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-3 rounded-lg transition-colors"
+          className="block bg-gray-600 hover:bg-gray-700 text-white px-6 py-3 rounded-lg transition-colors"
           socket={@socket}
         >
-          ← Back to Link Demo
+          Back to Link Demo
         </.react>
       </div>
     </div>
