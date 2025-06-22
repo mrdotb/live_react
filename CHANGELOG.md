@@ -5,6 +5,12 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v1.1.0](https://github.com/mrdotb/live_react/compare/v1.0.1...v1.1.0) (2025-06-22)
+
+### Features:
+
+* Add React Link component for Phoenix LiveView navigation by Gaoge Zhang
+
 ## [v1.0.1](https://github.com/mrdotb/live_react/compare/v1.0.1...v1.0.0) (2025-04-20)
 
 ### Bug Fixes:
