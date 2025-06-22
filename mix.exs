@@ -44,7 +44,7 @@ defmodule LiveReact.MixProject do
       {:telemetry, "~> 0.4 or ~> 1.0"},
       {:credo, "~> 1.7", only: [:dev, :test]},
       {:ex_doc, "~> 0.19", only: :dev, runtime: false},
-      {:git_ops, "~> 2.7.2", only: [:dev]}
+      {:git_ops, "~> 2.8.0", only: [:dev]}
     ]
   end
 
