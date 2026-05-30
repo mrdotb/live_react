@@ -19,8 +19,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - elixir: 1.18.1
-            erlang: 27.2.0
+          - elixir: 1.19.5
+            erlang: 27.3.4.10
     name: Elixir v${{ matrix.elixir }}, Erlang v${{ matrix.erlang }}
     steps:
       - uses: actions/checkout@v4

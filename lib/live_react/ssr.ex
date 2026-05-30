@@ -41,17 +41,19 @@ defmodule LiveReact.SSR do
       mod ->
         meta = %{component: name, props: props, slots: slots}
 
-        body =
-          :telemetry.span([:live_react, :ssr], meta, fn ->
-            {mod.render(name, props, slots), meta}
-          end)
-
-        with body when is_binary(body) <- body do
-          case String.split(body, "<!-- preload -->", parts: 2) do
-            [links, html] -> %{preloadLinks: links, html: html}
-            [body] -> %{preloadLinks: "", html: body}
-          end
-        end
+        :telemetry.span([:live_react, :ssr], meta, fn ->
+          {mod.render(name, props, slots), meta}
+        end)
+        |> parse_render_body()
     end
   end
+
+  defp parse_render_body(body) when is_binary(body) do
+    case String.split(body, "<!-- preload -->", parts: 2) do
+      [links, html] -> %{preloadLinks: links, html: html}
+      [html] -> %{preloadLinks: "", html: html}
+    end
+  end
+
+  defp parse_render_body(body), do: body
 end
