@@ -198,7 +198,9 @@ function MyComponent() {
       <Link href="/external">Traditional Link</Link>
       <Link patch="/same-lv?param=value">Patch Current LiveView</Link>
       <Link navigate="/other-lv">Navigate to Other LiveView</Link>
-      <Link navigate="/replace" replace={true}>Replace History</Link>
+      <Link navigate="/replace" replace={true}>
+        Replace History
+      </Link>
     </div>
   );
 }

@@ -69,12 +69,14 @@ npm run tsc          # Run TypeScript compiler
 ### Core Components
 
 **LiveReact Component (`lib/live_react.ex`)**
+
 - Main Phoenix component that renders React components inside LiveView
 - Handles SSR rendering, props serialization, and slot interoperability
 - Uses `phx-update="ignore"` to prevent LiveView from overwriting React-managed DOM
 - Implements ID generation to avoid collisions while maintaining consistency across dead/live renders
 
 **SSR System (`lib/live_react/ssr.ex`, `lib/live_react/ssr/*.ex`)**
+
 - Behavior-based SSR abstraction with telemetry support
 - Two implementations:
   - `ViteJS`: Makes POST requests to Vite dev server during development (requires `config :live_react, vite_host: "http://localhost:5173"`)
@@ -82,17 +84,20 @@ npm run tsc          # Run TypeScript compiler
 - Server responses can include preload links by splitting on `<!-- preload -->` marker
 
 **React Hook (`assets/js/live_react/hooks.js`)**
+
 - Phoenix LiveView hook that manages React component lifecycle
 - Handles hydration for SSR components vs fresh mounting
 - Provides LiveView interop functions via props: `pushEvent`, `pushEventTo`, `handleEvent`, `removeHandleEvent`, `upload`, `uploadTo`
 - Manages component unmounting on LiveView navigation
 
 **Vite Plugin (`assets/js/live_react/vite-plugin.js`)**
+
 - Custom Vite plugin that provides `/ssr_render` POST endpoint during development
 - Handles hot module reloading for .ex and .heex files
 - Configures process termination when Phoenix quits
 
 **Slots System (`lib/live_react/slots.ex`)**
+
 - Converts Phoenix slots to React children
 - Only supports default slot (`:inner_block`), passed as React children
 - Base64 encodes rendered HTML for transport to client
@@ -100,11 +105,13 @@ npm run tsc          # Run TypeScript compiler
 ### Data Flow
 
 1. **Server-side (First Render)**:
+
    - LiveView calls `<.react name="ComponentName" props... />`
    - SSR renders component if configured and it's a dead view
    - HTML sent to browser with data attributes: `data-name`, `data-props`, `data-slots`, `data-ssr`
 
 2. **Client-side (Mounting)**:
+
    - React hook reads data attributes from DOM
    - If `data-ssr` present, uses `ReactDOM.hydrateRoot()`; otherwise `ReactDOM.createRoot()`
    - Props include both user-provided props and LiveView interop functions
@@ -154,6 +161,7 @@ live_react_examples/        # Example Phoenix application
 ### Component Communication
 
 React components receive LiveView interop functions as props:
+
 - `pushEvent(event, payload)` - Send event to current LiveView
 - `pushEventTo(selector, event, payload)` - Send event to specific LiveView
 - `handleEvent(event, callback)` - Subscribe to server events
@@ -164,6 +172,7 @@ React components receive LiveView interop functions as props:
 ### SSR Configuration
 
 Development (use Vite):
+
 ```elixir
 # config/dev.exs
 config :live_react,
@@ -172,6 +181,7 @@ config :live_react,
 ```
 
 Production (use NodeJS):
+
 ```elixir
 # config/prod.exs
 config :live_react, ssr_module: LiveReact.SSR.NodeJS
@@ -183,25 +193,30 @@ config :live_react, ssr_module: LiveReact.SSR.NodeJS
 ### Component Registration
 
 Client-side components must be registered in a components object:
+
 ```javascript
 // assets/react-components/index.jsx
-export { default as Counter } from './counter.jsx'
-export { default as MyComponent } from './my-component.jsx'
+export { default as Counter } from "./counter.jsx";
+export { default as MyComponent } from "./my-component.jsx";
 ```
 
 Server-side (SSR) must export a `render` function:
+
 ```javascript
 // assets/js/server.js
-import * as components from '../react-components/index.jsx'
-export { render } from 'live_react/server'
+import * as components from "../react-components/index.jsx";
+export { render } from "live_react/server";
 ```
 
 ### LiveView Link Component
 
 The library includes a `Link` component for LiveView navigation:
+
 ```jsx
-import { Link } from 'live_react'
-<Link to="/path" navigate={true}>Navigate</Link>
+import { Link } from "live_react";
+<Link to="/path" navigate={true}>
+  Navigate
+</Link>;
 ```
 
 ## Testing

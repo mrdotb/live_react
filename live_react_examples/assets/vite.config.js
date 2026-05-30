@@ -12,20 +12,22 @@ export default defineConfig(({ command }) => {
   return {
     base: isDev ? undefined : "/assets",
     publicDir: "static",
-    plugins: [
-      react(),
-      liveReactPlugin(),
-      tailwindcss(),
-    ],
+    plugins: [react(), liveReactPlugin(), tailwindcss()],
     ssr: {
-      // we need it, because in SSR build we want no external
-      // and in dev, we want external for fast updates
-      noExternal: isDev ? undefined : true,
+      external: [
+        "react",
+        "react-dom",
+        "react-dom/server",
+        "react/jsx-runtime",
+        "react/jsx-dev-runtime",
+      ],
+      noExternal: ["live_react"],
     },
     resolve: {
       alias: {
-        "@": path.resolve(__dirname, "."),
+        "@": path.resolve(__dirname, "./react-components"),
       },
+      dedupe: ["react", "react-dom"],
     },
     optimizeDeps: {
       // these packages are loaded as file:../deps/<name> imports
@@ -40,13 +42,13 @@ export default defineConfig(({ command }) => {
       outDir: "../priv/static/assets", // emit assets to priv/static/assets
       emptyOutDir: true,
       sourcemap: isDev, // enable source map in dev build
-      // manifest: false, // do not generate manifest.json
+      manifest: false, // do not generate manifest.json
       rollupOptions: {
         input: {
           app: path.resolve(__dirname, "./js/app.js"),
         },
         output: {
-          // remove hashes to match phoenix way of handling asssets
+          // remove hashes to match phoenix way of handling assets
           entryFileNames: "[name].js",
           chunkFileNames: "[name].js",
           assetFileNames: "[name][extname]",
