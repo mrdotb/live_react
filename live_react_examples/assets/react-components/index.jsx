@@ -14,6 +14,7 @@ import { SSR } from "./ssr";
 import { Simple } from "./simple";
 import { SimpleProps } from "./simple-props";
 import { Slot } from "./slot";
+import { StreamDemo } from "./stream-demo";
 import { Typescript } from "./typescript";
 
 export default {
@@ -30,5 +31,6 @@ export default {
   Simple,
   SimpleProps,
   Slot,
+  StreamDemo,
   Typescript,
 };

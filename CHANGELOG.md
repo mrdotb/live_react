@@ -5,6 +5,17 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [Unreleased]
+
+### Breaking Changes:
+
+* `data-props` is now encoded via the new `LiveReact.Encoder` protocol instead of `Jason.Encoder`. Struct props must now `@derive LiveReact.Encoder` (or implement it explicitly) — plain maps are unaffected. See `LiveReact.Encoder` moduledoc for migration examples.
+
+### Features:
+
+* Props are now diffed and sent incrementally over `data-props-diff` instead of being fully re-sent on every update (`config :live_react, enable_props_diff: true` by default; opt out globally with `false` or per-component with `diff={false}`).
+* Added support for `Phoenix.LiveView.stream/3,4` assigns: any `%Phoenix.LiveView.LiveStream{}` value passed as a prop is now automatically diffed and delivered over `data-streams-diff`.
+
 ## [v1.1.0](https://github.com/mrdotb/live_react/compare/v1.0.1...v1.1.0) (2025-06-22)
 
 ### Features:

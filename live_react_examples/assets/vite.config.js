@@ -10,6 +10,12 @@ export default defineConfig(({ command }) => {
   const isDev = command !== "build";
 
   return {
+    server: {
+      port: parseInt(process.env.VITE_PORT) || 4011,
+      host: '0.0.0.0', // listen on all network interfaces
+      cors: true, // enable CORS for all origins in development
+      strictPort: true, // fail if port is already in use
+    },
     base: isDev ? undefined : "/assets",
     publicDir: "static",
     plugins: [react(), liveReactPlugin(), tailwindcss()],

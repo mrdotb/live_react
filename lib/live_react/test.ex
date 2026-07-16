@@ -38,6 +38,24 @@ defmodule LiveReact.Test do
       # SSR status and styling
       assert react.ssr == true
       assert react.class == "my-custom-class"
+
+  ## Configuration
+
+  ### enable_props_diff
+
+  When set to `false` in your config, LiveReact will always send full props and not send diffs.
+  This is useful for testing scenarios where you need to inspect the complete props state
+  rather than just the changes.
+
+  ```elixir
+  # config/test.exs
+  config :live_react,
+    enable_props_diff: false
+  ```
+
+  When disabled, the `props` field returned by `get_react/2` will always contain
+  the complete props state, making it easier to write comprehensive tests that verify the
+  full component state rather than just the incremental changes.
   """
 
   @compile {:no_warn_undefined, Floki}
@@ -88,12 +106,15 @@ defmodule LiveReact.Test do
         |> find_component!(opts)
 
       %{
-        props: Jason.decode!(attr(react, "data-props")),
+        props: LiveReact.Patch.decode_object(attr(react, "data-props")),
         component: attr(react, "data-name"),
         id: attr(react, "id"),
         slots: extract_base64_slots(attr(react, "data-slots")),
         ssr: if(is_nil(attr(react, "data-ssr")), do: false, else: true),
-        class: attr(react, "class")
+        use_diff: attr(react, "data-use-diff") == "true",
+        class: attr(react, "class"),
+        props_diff: LiveReact.Patch.deserialize(attr(react, "data-props-diff") || ""),
+        streams_diff: LiveReact.Patch.deserialize(attr(react, "data-streams-diff") || "")
       }
     else
       raise "Floki is not installed. Add {:floki, \">= 0.30.0\", only: :test} to your dependencies to use LiveReact.Test"

@@ -10,6 +10,7 @@ defmodule LiveReact.MixProject do
       version: @version,
       elixir: "~> 1.16",
       start_permanent: Mix.env() == :prod,
+      consolidate_protocols: Mix.env() != :test,
       deps: deps(),
       description: "E2E reactivity for React and LiveView",
       package: package(),
@@ -36,8 +37,11 @@ defmodule LiveReact.MixProject do
   defp deps do
     [
       {:jason, "~> 1.2"},
+      {:jsonpatch, "~> 2.3"},
       {:nodejs, "~> 3.1", optional: true},
       {:floki, ">= 0.30.0", optional: true},
+      {:ecto, "~> 3.0", optional: true},
+      {:phoenix_ecto, "~> 4.0", optional: true},
       {:phoenix, ">= 1.7.0"},
       {:phoenix_html, ">= 3.3.1"},
       {:phoenix_live_view, ">= 0.18.0"},

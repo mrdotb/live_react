@@ -41,6 +41,9 @@ defmodule LiveReactExamplesWeb.LiveDemoAssigns do
         {LiveReactExamplesWeb.LiveLinkUsage, _} ->
           :link_usage
 
+        {LiveReactExamplesWeb.LiveStreamDemo, _} ->
+          :stream_demo
+
         {_view, _live_action} ->
           nil
       end
