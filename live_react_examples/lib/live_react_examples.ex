@@ -146,6 +146,16 @@ defmodule LiveReactExamples do
     }
   end
 
+  def demo(:stream_demo) do
+    %{
+      raw_view_url: "#{@raw_url}#{@live_views}/stream_demo.ex",
+      view_url: "#{@url}#{@live_views}/stream_demo.ex",
+      view_language: "elixir",
+      raw_react_url: "#{@raw_url}#{@react}/stream-demo.jsx",
+      react_url: "#{@url}#{@react}/stream-demo.jsx"
+    }
+  end
+
   def demo(demo) do
     raise ArgumentError, "Unknown demo: #{inspect(demo)}"
   end

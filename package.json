@@ -24,9 +24,15 @@
     "assets/js/live_react/*"
   ],
   "devDependencies": {
-    "prettier": "^3.3.2"
+    "jsdom": "^26.1.0",
+    "prettier": "^3.3.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "vitest": "^3.2.4"
   },
   "scripts": {
-    "format": "npx prettier --write ."
+    "format": "npx prettier --write .",
+    "test": "vitest run",
+    "test:watch": "vitest --watch"
   }
 }
