@@ -190,7 +190,7 @@ defmodule LiveReact.Patch do
   defp take_js_string(payload, length), do: take_js_string(payload, payload, length, 0)
 
   defp take_js_string(original, _rest, 0, bytes) do
-    <<value::binary-size(bytes), rest::binary>> = original
+    <<value::binary-size(^bytes), rest::binary>> = original
     {value, rest}
   end
 

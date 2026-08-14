@@ -124,13 +124,11 @@ export function getHooks(components) {
       }
     },
     destroyed() {
-      if (this._root) {
-        window.addEventListener(
-          "phx:page-loading-stop",
-          () => this._root.unmount(),
-          { once: true },
-        );
-      }
+      const root = this._root;
+      if (!root) return;
+
+      this._root = null;
+      root.unmount();
     },
   };
 

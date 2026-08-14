@@ -52,33 +52,44 @@ defprotocol LiveReact.Encoder do
   @doc """
   Encodes a value to one of the primitive types.
   """
+  @spec encode(t) :: any()
+  def encode(value)
+
   @spec encode(t, opts) :: any()
-  def encode(value, opts \\ [])
+  def encode(value, opts)
 end
 
 defimpl LiveReact.Encoder, for: Integer do
+  def encode(value), do: encode(value, [])
   def encode(value, _opts), do: value
 end
 
 defimpl LiveReact.Encoder, for: Float do
+  def encode(value), do: encode(value, [])
   def encode(value, _opts), do: value
 end
 
 defimpl LiveReact.Encoder, for: BitString do
+  def encode(value), do: encode(value, [])
   def encode(value, _opts), do: value
 end
 
 defimpl LiveReact.Encoder, for: Atom do
+  def encode(value), do: encode(value, [])
   def encode(atom, _opts), do: atom
 end
 
 defimpl LiveReact.Encoder, for: List do
+  def encode(value), do: encode(value, [])
+
   def encode(list, opts) do
     Enum.map(list, &LiveReact.Encoder.encode(&1, opts))
   end
 end
 
 defimpl LiveReact.Encoder, for: Map do
+  def encode(value), do: encode(value, [])
+
   def encode(map, opts) do
     Map.new(map, fn {key, value} ->
       {key, LiveReact.Encoder.encode(value, opts)}
@@ -87,6 +98,8 @@ defimpl LiveReact.Encoder, for: Map do
 end
 
 defimpl LiveReact.Encoder, for: [Date, Time, NaiveDateTime, DateTime] do
+  def encode(value), do: encode(value, [])
+
   def encode(value, _opts) do
     @for.to_iso8601(value)
   end
@@ -98,6 +111,8 @@ defimpl LiveReact.Encoder, for: Any do
 
     quote do
       defimpl LiveReact.Encoder, for: unquote(module) do
+        def encode(value), do: encode(value, [])
+
         def encode(struct, opts) do
           struct
           |> Map.take(unquote(fields))
@@ -106,6 +121,8 @@ defimpl LiveReact.Encoder, for: Any do
       end
     end
   end
+
+  def encode(value), do: encode(value, [])
 
   def encode(%{__struct__: module} = struct, _opts) do
     raise Protocol.UndefinedError,
@@ -178,6 +195,8 @@ defimpl LiveReact.Encoder, for: Any do
 end
 
 defimpl LiveReact.Encoder, for: Phoenix.LiveView.AsyncResult do
+  def encode(value), do: encode(value, [])
+
   def encode(%Phoenix.LiveView.AsyncResult{} = struct, opts) do
     LiveReact.Encoder.encode(
       %{
@@ -196,6 +215,8 @@ defimpl LiveReact.Encoder, for: Phoenix.LiveView.AsyncResult do
 end
 
 defimpl LiveReact.Encoder, for: Phoenix.LiveView.UploadConfig do
+  def encode(value), do: encode(value, [])
+
   def encode(%Phoenix.LiveView.UploadConfig{} = struct, opts) do
     errors =
       Enum.map(struct.errors, fn {key, value} ->
@@ -225,6 +246,8 @@ defimpl LiveReact.Encoder, for: Phoenix.LiveView.UploadConfig do
 end
 
 defimpl LiveReact.Encoder, for: Phoenix.LiveView.UploadEntry do
+  def encode(value), do: encode(value, [])
+
   def encode(%Phoenix.LiveView.UploadEntry{} = struct, opts) do
     LiveReact.Encoder.encode(
       %{
@@ -243,6 +266,8 @@ defimpl LiveReact.Encoder, for: Phoenix.LiveView.UploadEntry do
 end
 
 defimpl LiveReact.Encoder, for: Phoenix.HTML.Form do
+  def encode(value), do: encode(value, [])
+
   def encode(%Phoenix.HTML.Form{} = form, opts) do
     LiveReact.Encoder.encode(
       %{

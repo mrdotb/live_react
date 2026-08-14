@@ -13,8 +13,6 @@ defmodule LiveReact do
   alias Phoenix.LiveView
   alias Phoenix.LiveView.LiveStream
 
-  require Logger
-
   @ssr_default Application.compile_env(:live_react, :ssr, true)
   @diff_default Application.compile_env(:live_react, :enable_props_diff, true)
 

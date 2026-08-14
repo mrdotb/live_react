@@ -64,6 +64,7 @@ describe("ReactHook", () => {
   beforeEach(async () => {
     vi.resetModules();
     renderMock.mockClear();
+    rootMock.unmount.mockClear();
     ({ getHooks } = await import("./hooks"));
     ({ ReactHook } = getHooks({ TestComponent }));
   });
@@ -218,5 +219,23 @@ describe("ReactHook", () => {
     ReactHook.reconnected.call(hook);
 
     expect(lastRenderedProps().title).toBe("World");
+  });
+
+  it("destroyed() immediately unmounts the root exactly once and clears it", () => {
+    const hook = createMockLiveViewHook({
+      "data-name": "TestComponent",
+      "data-props": encodeProps({ title: "Hello" }),
+    });
+
+    ReactHook.mounted.call(hook);
+    ReactHook.destroyed.call(hook);
+
+    expect(rootMock.unmount).toHaveBeenCalledTimes(1);
+    expect(hook._root).toBeNull();
+
+    window.dispatchEvent(new Event("phx:page-loading-stop"));
+    ReactHook.destroyed.call(hook);
+
+    expect(rootMock.unmount).toHaveBeenCalledTimes(1);
   });
 });
