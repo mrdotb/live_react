@@ -283,7 +283,7 @@ defimpl LiveReact.Encoder, for: Phoenix.HTML.Form do
   defp get_form_validity(%{source: %{valid?: valid}}), do: valid
   defp get_form_validity(_), do: true
 
-  if Code.ensure_loaded?(Ecto) do
+  if Code.ensure_loaded?(Ecto) and Code.ensure_loaded?(Phoenix.HTML.FormData.Ecto.Changeset) do
     @relations [:embed, :assoc]
 
     defp collect_changeset_values(%Ecto.Changeset{} = source, opts) do
