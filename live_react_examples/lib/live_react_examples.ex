@@ -13,9 +13,23 @@ defmodule LiveReactExamples do
   @live_views "/lib/live_react_examples_web/live"
   @react "/assets/react-components"
 
-  def demo(name)
+  @demo_defaults %{
+    view_type: "LiveView",
+    view_language: "heex",
+    react_language: "jsx"
+  }
 
-  def demo(:simple) do
+  @doc """
+  Returns the source urls and languages powering the `demo` tab of a page.
+
+  Every key of `@demo_defaults` is always present, so callers can read them
+  directly instead of relying on component attribute defaults.
+  """
+  def demo(name), do: Map.merge(@demo_defaults, demo_urls(name))
+
+  defp demo_urls(name)
+
+  defp demo_urls(:simple) do
     %{
       view_type: "DeadView",
       raw_view_url: "#{@raw_url}/#{@dead_views}/simple.html.heex",
@@ -25,7 +39,7 @@ defmodule LiveReactExamples do
     }
   end
 
-  def demo(:simple_props) do
+  defp demo_urls(:simple_props) do
     %{
       view_type: "DeadView",
       raw_view_url: "#{@raw_url}/#{@dead_views}/simple_props.html.heex",
@@ -35,7 +49,7 @@ defmodule LiveReactExamples do
     }
   end
 
-  def demo(:typescript) do
+  defp demo_urls(:typescript) do
     %{
       view_type: "DeadView",
       raw_view_url: "#{@raw_url}#{@dead_views}/typescript.html.heex",
@@ -46,7 +60,7 @@ defmodule LiveReactExamples do
     }
   end
 
-  def demo(:lazy) do
+  defp demo_urls(:lazy) do
     %{
       view_type: "DeadView",
       raw_view_url: "#{@raw_url}#{@dead_views}/lazy.html.heex",
@@ -56,7 +70,7 @@ defmodule LiveReactExamples do
     }
   end
 
-  def demo(:counter) do
+  defp demo_urls(:counter) do
     %{
       raw_view_url: "#{@raw_url}#{@live_views}/counter.ex",
       view_url: "#{@url}#{@live_views}/counter.ex",
@@ -66,7 +80,7 @@ defmodule LiveReactExamples do
     }
   end
 
-  def demo(:log_list) do
+  defp demo_urls(:log_list) do
     %{
       raw_view_url: "#{@raw_url}#{@live_views}/log_list.ex",
       view_url: "#{@url}#{@live_views}/log_list.ex",
@@ -76,7 +90,7 @@ defmodule LiveReactExamples do
     }
   end
 
-  def demo(:flash_sonner) do
+  defp demo_urls(:flash_sonner) do
     %{
       raw_view_url: "#{@raw_url}#{@live_views}/flash_sonner.ex",
       view_url: "#{@url}#{@live_views}/flash_sonner.ex",
@@ -86,7 +100,7 @@ defmodule LiveReactExamples do
     }
   end
 
-  def demo(:ssr) do
+  defp demo_urls(:ssr) do
     %{
       raw_view_url: "#{@raw_url}#{@live_views}/ssr.ex",
       view_url: "#{@url}#{@live_views}/ssr.ex",
@@ -96,7 +110,7 @@ defmodule LiveReactExamples do
     }
   end
 
-  def demo(:hybrid_form) do
+  defp demo_urls(:hybrid_form) do
     %{
       raw_view_url: "#{@raw_url}#{@live_views}/hybrid_form.ex",
       view_url: "#{@url}#{@live_views}/hybrid_form.ex",
@@ -106,7 +120,7 @@ defmodule LiveReactExamples do
     }
   end
 
-  def demo(:slot) do
+  defp demo_urls(:slot) do
     %{
       raw_view_url: "#{@raw_url}#{@live_views}/slot.ex",
       view_url: "#{@url}#{@live_views}/slot.ex",
@@ -116,7 +130,7 @@ defmodule LiveReactExamples do
     }
   end
 
-  def demo(:context) do
+  defp demo_urls(:context) do
     %{
       raw_view_url: "#{@raw_url}#{@live_views}/context.ex",
       view_url: "#{@url}#{@live_views}/context.ex",
@@ -126,7 +140,7 @@ defmodule LiveReactExamples do
     }
   end
 
-  def demo(:link_demo) do
+  defp demo_urls(:link_demo) do
     %{
       raw_view_url: "#{@raw_url}#{@live_views}/link_demo.ex",
       view_url: "#{@url}#{@live_views}/link_demo.ex",
@@ -136,7 +150,7 @@ defmodule LiveReactExamples do
     }
   end
 
-  def demo(:link_usage) do
+  defp demo_urls(:link_usage) do
     %{
       raw_view_url: "#{@raw_url}#{@live_views}/link_usage.ex",
       view_url: "#{@url}#{@live_views}/link_usage.ex",
@@ -146,7 +160,7 @@ defmodule LiveReactExamples do
     }
   end
 
-  def demo(:stream_demo) do
+  defp demo_urls(:stream_demo) do
     %{
       raw_view_url: "#{@raw_url}#{@live_views}/stream_demo.ex",
       view_url: "#{@url}#{@live_views}/stream_demo.ex",
@@ -156,7 +170,7 @@ defmodule LiveReactExamples do
     }
   end
 
-  def demo(demo) do
+  defp demo_urls(demo) do
     raise ArgumentError, "Unknown demo: #{inspect(demo)}"
   end
 end
