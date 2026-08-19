@@ -8,7 +8,7 @@ defmodule LiveReact.Encoder.LiveViewTest do
   describe "AsyncResult" do
     test "encodes loading state" do
       result = AsyncResult.loading()
-      encoded = Encoder.encode(result)
+      encoded = Encoder.encode(result, [])
 
       assert encoded.ok == false
       assert encoded.loading == true
@@ -17,7 +17,7 @@ defmodule LiveReact.Encoder.LiveViewTest do
 
     test "encodes successful state" do
       result = AsyncResult.loading() |> AsyncResult.ok("value")
-      encoded = Encoder.encode(result)
+      encoded = Encoder.encode(result, [])
 
       assert encoded.ok == true
       assert encoded.result == "value"
@@ -25,7 +25,7 @@ defmodule LiveReact.Encoder.LiveViewTest do
 
     test "encodes failed state" do
       result = AsyncResult.loading() |> AsyncResult.failed({:error, "boom"})
-      encoded = Encoder.encode(result)
+      encoded = Encoder.encode(result, [])
 
       assert encoded.ok == false
       assert encoded.failed == "boom"
@@ -35,7 +35,7 @@ defmodule LiveReact.Encoder.LiveViewTest do
   describe "UploadEntry / UploadConfig" do
     test "encodes an empty UploadConfig" do
       config = UploadConfig.build(:avatar, "ref123", accept: :any, max_entries: 1)
-      encoded = Encoder.encode(config)
+      encoded = Encoder.encode(config, [])
 
       assert encoded.ref
       assert encoded.name == :avatar

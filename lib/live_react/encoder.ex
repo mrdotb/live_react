@@ -53,7 +53,7 @@ defprotocol LiveReact.Encoder do
   Encodes a value to one of the primitive types.
   """
   @spec encode(t, opts) :: any()
-  def encode(value, opts \\ [])
+  def encode(value, opts)
 end
 
 defimpl LiveReact.Encoder, for: Integer do

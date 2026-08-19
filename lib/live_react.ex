@@ -13,8 +13,6 @@ defmodule LiveReact do
   alias Phoenix.LiveView
   alias Phoenix.LiveView.LiveStream
 
-  require Logger
-
   @ssr_default Application.compile_env(:live_react, :ssr, true)
   @diff_default Application.compile_env(:live_react, :enable_props_diff, true)
 
@@ -30,7 +28,7 @@ defmodule LiveReact do
     <div
       id={assigns[:id] || id(@__component_name)}
       data-name={@__component_name}
-      data-props={"#{Patch.encode_object(Encoder.encode(@props))}"}
+      data-props={"#{Patch.encode_object(Encoder.encode(@props, []))}"}
       data-props-diff={"#{@props_diff}"}
       data-streams-diff={"#{@streams_diff}"}
       data-slots={"#{@slots |> Slots.base_encode_64 |> json}"}
@@ -121,13 +119,13 @@ defmodule LiveReact do
           []
 
         true ->
-          [%{op: "replace", path: "/#{k}", value: Encoder.encode(new_value)}]
+          [%{op: "replace", path: "/#{k}", value: Encoder.encode(new_value, [])}]
 
         old_value ->
           Jsonpatch.diff(old_value, new_value,
             ancestor_path: "/#{k}",
             prepare_map: fn
-              struct when is_struct(struct) -> Encoder.encode(struct)
+              struct when is_struct(struct) -> Encoder.encode(struct, [])
               rest -> rest
             end,
             object_hash: &object_hash/1
@@ -176,7 +174,7 @@ defmodule LiveReact do
     stream.inserts
     |> Enum.reverse()
     |> Enum.reduce(patches, fn {dom_id, at, item, limit, update_only}, patches ->
-      item = Map.put(Encoder.encode(item), :__dom_id, dom_id)
+      item = Map.put(Encoder.encode(item, []), :__dom_id, dom_id)
 
       patches =
         if update_only,
@@ -225,7 +223,7 @@ defmodule LiveReact do
     try do
       name = Map.get(assigns, :name)
 
-      SSR.render(name, Encoder.encode(assigns.props), assigns.slots)
+      SSR.render(name, Encoder.encode(assigns.props, []), assigns.slots)
     rescue
       SSR.NotConfigured ->
         nil

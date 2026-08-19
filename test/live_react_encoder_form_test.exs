@@ -11,7 +11,7 @@ defmodule LiveReact.EncoderFormTest do
     module = source.__struct__
     changeset = module.changeset(source, attrs)
     form = FormData.to_form(changeset, as: module.__schema__(:source))
-    Encoder.encode(form)
+    Encoder.encode(form, [])
   end
 
   defmodule Simple do
@@ -105,7 +105,7 @@ defmodule LiveReact.EncoderFormTest do
       }
 
       form = to_form(form_data, as: :user)
-      encoded = Encoder.encode(form)
+      encoded = Encoder.encode(form, [])
 
       assert encoded == %{
                name: "user",
@@ -131,7 +131,7 @@ defmodule LiveReact.EncoderFormTest do
       }
 
       form = to_form(form_data, as: :profile)
-      encoded = Encoder.encode(form)
+      encoded = Encoder.encode(form, [])
 
       assert encoded == %{
                name: "profile",
