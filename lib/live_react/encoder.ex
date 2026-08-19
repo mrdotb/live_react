@@ -281,16 +281,7 @@ defimpl LiveReact.Encoder, for: Phoenix.HTML.Form do
           collect_changeset_values(changeset, opts)
 
         :error ->
-          case Map.fetch!(source.data, field) do
-            %Ecto.Association.NotLoaded{} = not_loaded ->
-              if opts[:nilify_not_loaded], do: nil, else: not_loaded
-
-            %{__meta__: _} = value ->
-              Map.delete(value, :__meta__)
-
-            value ->
-              value
-          end
+          data_field_value(Map.fetch!(source.data, field), opts)
       end
     end
 
@@ -303,22 +294,30 @@ defimpl LiveReact.Encoder, for: Phoenix.HTML.Form do
           |> Enum.map(&collect_changeset_values(&1, opts))
 
         :error ->
-          case Map.fetch!(source.data, field) do
-            %Ecto.Association.NotLoaded{} = not_loaded ->
-              if opts[:nilify_not_loaded], do: nil, else: not_loaded
-
-            [%{__meta__: _} | _] = value ->
-              Enum.map(value, &Map.delete(&1, :__meta__))
-
-            value ->
-              value
-          end
+          data_field_values(Map.fetch!(source.data, field), opts)
       end
     end
 
     defp get_field_value(source, field, _type, _opts) do
       Phoenix.HTML.FormData.Ecto.Changeset.input_value(source, %{params: source.params}, field)
     end
+
+    defp data_field_value(%Ecto.Association.NotLoaded{} = not_loaded, opts) do
+      if opts[:nilify_not_loaded], do: nil, else: not_loaded
+    end
+
+    defp data_field_value(%{__meta__: _} = value, _opts), do: Map.delete(value, :__meta__)
+    defp data_field_value(value, _opts), do: value
+
+    defp data_field_values(%Ecto.Association.NotLoaded{} = not_loaded, opts) do
+      if opts[:nilify_not_loaded], do: nil, else: not_loaded
+    end
+
+    defp data_field_values([%{__meta__: _} | _] = value, _opts) do
+      Enum.map(value, &Map.delete(&1, :__meta__))
+    end
+
+    defp data_field_values(value, _opts), do: value
 
     def encode_form_values(%{impl: Phoenix.HTML.FormData.Ecto.Changeset, source: source}, opts) do
       source |> collect_changeset_values(opts) |> LiveReact.Encoder.encode(opts)
@@ -340,26 +339,33 @@ defimpl LiveReact.Encoder, for: Phoenix.HTML.Form do
       errors = translate_errors(changeset.errors)
 
       Enum.reduce(changeset.changes, errors, fn {field, value}, acc ->
-        case Map.get(changeset.types, field) do
-          {tag, %{cardinality: :one}} when tag in @relations ->
-            embed_errors = collect_changeset_errors(value)
-            if embed_errors == %{}, do: acc, else: Map.put(acc, field, embed_errors)
-
-          {tag, %{cardinality: :many}} when tag in @relations ->
-            list_errors =
-              value
-              |> Enum.filter(&(&1.params != nil))
-              |> Enum.map(fn embed_changeset ->
-                embed_errors = collect_changeset_errors(embed_changeset)
-                if embed_errors == %{}, do: nil, else: embed_errors
-              end)
-
-            if Enum.all?(list_errors, &is_nil/1), do: acc, else: Map.put(acc, field, list_errors)
-
-          _ ->
-            acc
-        end
+        put_relation_errors(acc, field, value, Map.get(changeset.types, field))
       end)
+    end
+
+    defp put_relation_errors(acc, field, value, {tag, %{cardinality: :one}})
+         when tag in @relations do
+      embed_errors = collect_changeset_errors(value)
+      if embed_errors == %{}, do: acc, else: Map.put(acc, field, embed_errors)
+    end
+
+    defp put_relation_errors(acc, field, value, {tag, %{cardinality: :many}})
+         when tag in @relations do
+      list_errors =
+        value
+        |> Enum.filter(&(&1.params != nil))
+        |> Enum.map(&nilify_empty_errors/1)
+
+      if Enum.all?(list_errors, &is_nil/1), do: acc, else: Map.put(acc, field, list_errors)
+    end
+
+    defp put_relation_errors(acc, _field, _value, _type), do: acc
+
+    defp nilify_empty_errors(changeset) do
+      case collect_changeset_errors(changeset) do
+        errors when errors == %{} -> nil
+        errors -> errors
+      end
     end
 
     def encode_form_errors(%{impl: Phoenix.HTML.FormData.Ecto.Changeset} = form) do
