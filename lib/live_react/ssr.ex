@@ -5,8 +5,6 @@ defmodule LiveReact.SSR.NotConfigured do
 end
 
 defmodule LiveReact.SSR do
-  require Logger
-
   @moduledoc """
   A behaviour for rendering React components server-side.
 
