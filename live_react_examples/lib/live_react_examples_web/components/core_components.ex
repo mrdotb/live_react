@@ -849,13 +849,11 @@ defmodule LiveReactExamplesWeb.CoreComponents do
     |> JS.show(to: "##{root} .tabs-content[value=#{value}]")
   end
 
-  attr :view_type, :string, default: "LiveView"
-  attr :view_url, :string, required: true
-  attr :view_language, :string, default: "heex"
-  attr :raw_view_url, :string, required: true
-  attr :react_url, :string, required: true
-  attr :raw_react_url, :string, required: true
-  attr :react_language, :string, default: "jsx"
+  # Takes the demo name rather than the resolved urls: every attribute below is
+  # derived from `@demo` alone, so LiveView can skip this whole subtree when only
+  # the slot changes. Spreading a map here (`<.demo {...}>`) would disable that
+  # change tracking and re-render the GithubCode components on every update.
+  attr :demo, :atom, required: true
   slot :inner_block, required: true
 
   def demo(assigns) do
@@ -863,7 +861,9 @@ defmodule LiveReactExamplesWeb.CoreComponents do
     <.tabs default="preview" id="demo" class="w-full">
       <.tabs_list class="grid w-full grid-cols-3">
         <.tabs_trigger root="demo" value="preview" data-state="active">Preview</.tabs_trigger>
-        <.tabs_trigger root="demo" value="view">{@view_type}</.tabs_trigger>
+        <.tabs_trigger root="demo" value="view">
+          {LiveReactExamples.demo(@demo).view_type}
+        </.tabs_trigger>
         <.tabs_trigger root="demo" value="react">React</.tabs_trigger>
       </.tabs_list>
       <.tabs_content value="preview">
@@ -878,14 +878,19 @@ defmodule LiveReactExamplesWeb.CoreComponents do
           <div class="pt-6 px-6">
             <a
               class="hover:underline font-medium text-card-foreground"
-              href={@view_url}
+              href={LiveReactExamples.demo(@demo).view_url}
               target="_blank"
             >
               Check on Github
             </a>
           </div>
           <.card_content>
-            <LiveReact.react name="GithubCode" url={@raw_view_url} language="elixir" />
+            <LiveReact.react
+              id="github-code-view"
+              name="GithubCode"
+              url={LiveReactExamples.demo(@demo).raw_view_url}
+              language="elixir"
+            />
           </.card_content>
         </.card>
       </.tabs_content>
@@ -894,14 +899,19 @@ defmodule LiveReactExamplesWeb.CoreComponents do
           <div class="pt-6 px-6">
             <a
               class="hover:underline font-medium text-card-foreground"
-              href={@react_url}
+              href={LiveReactExamples.demo(@demo).react_url}
               target="_blank"
             >
               Check on Github
             </a>
           </div>
           <.card_content class="p-6">
-            <LiveReact.react name="GithubCode" url={@raw_react_url} language={@react_language} />
+            <LiveReact.react
+              id="github-code-react"
+              name="GithubCode"
+              url={LiveReactExamples.demo(@demo).raw_react_url}
+              language={LiveReactExamples.demo(@demo).react_language}
+            />
           </.card_content>
         </.card>
       </.tabs_content>
