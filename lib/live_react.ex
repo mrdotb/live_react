@@ -22,56 +22,8 @@ defmodule LiveReact do
   Render a React component.
   """
   def react(assigns) do
-    init = assigns.__changed__ == nil
-    dead = assigns[:socket] == nil or not LiveView.connected?(assigns[:socket])
-    use_diff = Map.get(assigns, :diff, @diff_default)
-    use_streams_diff = Enum.any?(assigns, fn {_k, v} -> match?(%LiveStream{}, v) end)
-    render_ssr? = init and dead and Map.get(assigns, :ssr, @ssr_default)
-
-    base_assigns =
-      if use_diff do
-        Enum.filter(assigns, fn {k, _v} -> key_changed(assigns, k) end)
-      else
-        assigns
-      end
-
-    {props, _} = extract(base_assigns, assigns, :props)
-    {streams, _} = extract(base_assigns, assigns, :streams)
-    {slots, slots_changed?} = extract(assigns, assigns, :slots)
-    component_name = Map.get(assigns, :name)
-
-    props_diff = if use_diff, do: calculate_props_diff(props, assigns), else: []
-
-    streams_diff =
-      if use_streams_diff, do: calculate_streams_diff(streams, init or dead), else: []
-
-    assigns =
-      assigns
-      |> Map.put_new(:class, nil)
-      |> Map.put(:__component_name, component_name)
-      |> Map.put(:props, props)
-      |> Map.put(:props_diff, Patch.serialize(props_diff))
-      |> Map.put(:streams_diff, Patch.serialize(streams_diff))
-      |> Map.put(:use_diff, use_diff)
-      |> Map.put(:slots, if(slots_changed?, do: Slots.rendered_slot_map(slots), else: %{}))
-
-    assigns =
-      Map.put(assigns, :ssr_render, if(render_ssr?, do: ssr_render(assigns), else: nil))
-
-    computed_changed =
-      %{
-        props: init or dead or not use_diff,
-        slots: slots_changed?,
-        ssr_render: render_ssr?,
-        props_diff: not init and not dead and use_diff,
-        streams_diff: use_streams_diff
-      }
-
-    assigns =
-      update_in(assigns.__changed__, fn
-        nil -> nil
-        changed -> for {k, true} <- computed_changed, into: changed, do: {k, true}
-      end)
+    flags = render_flags(assigns)
+    assigns = prepare_assigns(assigns, flags)
 
     # It's important to not add extra `\n` in the inner div or it will break hydration
     ~H"""
@@ -89,6 +41,74 @@ defmodule LiveReact do
       class={@class}
     ><%= raw(@ssr_render[:html]) %></div>
     """
+  end
+
+  # Flags derived from the assigns that drive how the component is rendered.
+  defp render_flags(assigns) do
+    init = assigns.__changed__ == nil
+    dead = assigns[:socket] == nil or not LiveView.connected?(assigns[:socket])
+
+    %{
+      init: init,
+      dead: dead,
+      diff: Map.get(assigns, :diff, @diff_default),
+      streams_diff: Enum.any?(assigns, fn {_k, v} -> match?(%LiveStream{}, v) end),
+      ssr: init and dead and Map.get(assigns, :ssr, @ssr_default)
+    }
+  end
+
+  # Builds the assigns consumed by the template: props, diffs, slots and SSR output.
+  defp prepare_assigns(assigns, flags) do
+    base_assigns =
+      if flags.diff do
+        Enum.filter(assigns, fn {k, _v} -> key_changed(assigns, k) end)
+      else
+        assigns
+      end
+
+    {props, _} = extract(base_assigns, assigns, :props)
+    {streams, _} = extract(base_assigns, assigns, :streams)
+    {slots, slots_changed?} = extract(assigns, assigns, :slots)
+
+    props_diff = if flags.diff, do: calculate_props_diff(props, assigns), else: []
+
+    streams_diff =
+      if flags.streams_diff,
+        do: calculate_streams_diff(streams, flags.init or flags.dead),
+        else: []
+
+    assigns
+    |> Map.put_new(:class, nil)
+    |> Map.put(:__component_name, Map.get(assigns, :name))
+    |> Map.put(:props, props)
+    |> Map.put(:props_diff, Patch.serialize(props_diff))
+    |> Map.put(:streams_diff, Patch.serialize(streams_diff))
+    |> Map.put(:use_diff, flags.diff)
+    |> Map.put(:slots, if(slots_changed?, do: Slots.rendered_slot_map(slots), else: %{}))
+    |> put_ssr_render(flags)
+    |> mark_computed_changed(flags, slots_changed?)
+  end
+
+  defp put_ssr_render(assigns, flags) do
+    Map.put(assigns, :ssr_render, if(flags.ssr, do: ssr_render(assigns), else: nil))
+  end
+
+  # Marks the assigns we computed ourselves as changed so LiveView diffs them.
+  defp mark_computed_changed(assigns, flags, slots_changed?) do
+    full_props? = flags.init or flags.dead or not flags.diff
+
+    computed_changed = %{
+      props: full_props?,
+      slots: slots_changed?,
+      ssr_render: flags.ssr,
+      props_diff: not full_props?,
+      streams_diff: flags.streams_diff
+    }
+
+    update_in(assigns.__changed__, fn
+      nil -> nil
+      changed -> for {k, true} <- computed_changed, into: changed, do: {k, true}
+    end)
   end
 
   # Calculates minimal JSON Patch operations for changed props only.
