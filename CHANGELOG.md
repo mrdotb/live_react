@@ -16,6 +16,10 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 * Props are now diffed and sent incrementally over `data-props-diff` instead of being fully re-sent on every update (`config :live_react, enable_props_diff: true` by default; opt out globally with `false` or per-component with `diff={false}`).
 * Added support for `Phoenix.LiveView.stream/3,4` assigns: any `%Phoenix.LiveView.LiveStream{}` value passed as a prop is now automatically diffed and delivered over `data-streams-diff`.
 
+### Bug Fixes:
+
+* Props diffing no longer requires the call site to pass `socket`. A render was previously treated as dead whenever `socket` was absent, which forced the full-props branch on every update: `data-props` was resent carrying only the *changed* keys, while `data-props-diff` was never marked as changed. A client in diff mode therefore read a diff attribute that never moved and silently stopped updating. `dead` is now only derived on the initial render, where it is both knowable and the only place it is used.
+
 ## [v1.1.0](https://github.com/mrdotb/live_react/compare/v1.0.1...v1.1.0) (2025-06-22)
 
 ### Features:

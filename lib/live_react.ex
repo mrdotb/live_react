@@ -44,7 +44,18 @@ defmodule LiveReact do
   # Flags derived from the assigns that drive how the component is rendered.
   defp render_flags(assigns) do
     init = assigns.__changed__ == nil
-    dead = assigns[:socket] == nil or not LiveView.connected?(assigns[:socket])
+
+    # A populated `__changed__` means LiveView is re-rendering this component,
+    # which only ever happens in a connected view. So a render can only be dead
+    # on the very first pass -- and that is also the only place `dead` matters,
+    # since the SSR decision below is already gated on `init`.
+    #
+    # Deriving it this way means a call site that does not pass `socket` still
+    # gets correct props diffing. Previously such a call site looked dead on
+    # every render, which sent a *partial* snapshot in `data-props` while never
+    # marking `data-props-diff` as changed -- so the client, being in diff mode,
+    # read a diff attribute that never moved and silently stopped updating.
+    dead = init and (assigns[:socket] == nil or not LiveView.connected?(assigns[:socket]))
 
     %{
       init: init,
