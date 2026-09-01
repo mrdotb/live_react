@@ -35,34 +35,23 @@ mix deps.unlock --check-unused
 mix docs
 ```
 
-### Examples Application (live_react_examples/)
+### Examples Application
+
+The demo app lives in its own repository:
+[mrdotb/live_react_examples](https://github.com/mrdotb/live_react_examples). It
+depends on the published package by default; clone it alongside this repo and
+set `LIVE_REACT_PATH` to run it against your working copy of the library:
 
 ```bash
-cd live_react_examples
-
-# Setup (install deps and build assets)
+cd ../live_react_examples
+export LIVE_REACT_PATH=../live_react
+mix deps.get
+ln -sfn ../../live_react deps/live_react  # so the JS side resolves it too
 mix setup
-
-# Run the development server
 mix phx.server
-
-# Build assets
-mix assets.build
-
-# Build assets for deployment
-mix assets.deploy
-
-# Install assets dependencies only
-mix assets.setup
-# Equivalent to: cd assets && npm install
-
-# Asset commands (from assets/ directory)
-cd assets
-npm run dev          # Start Vite dev server
-npm run build        # Build client assets
-npm run build-server # Build SSR server bundle
-npm run tsc          # Run TypeScript compiler
 ```
+
+See that repository's README for the full workflow.
 
 ## Architecture
 
@@ -144,17 +133,10 @@ assets/
     vite-plugin.js          # Vite plugin for SSR endpoint
     utils.js                # Utilities
   copy/                     # Files copied during installation
-
-live_react_examples/        # Example Phoenix application
-  assets/
-    react-components/       # Example React components
-    js/
-      app.js               # Main application entry
-      server.js            # SSR server setup
-  lib/
-    live_react_examples_web/
-      live/                # LiveView examples
 ```
+
+The example Phoenix application lives in a separate repository,
+[mrdotb/live_react_examples](https://github.com/mrdotb/live_react_examples).
 
 ## Key Patterns
 

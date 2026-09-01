@@ -22,7 +22,7 @@ React inside Phoenix LiveView.
 
 ## Resources
 
-- [Demo](https://live-react-examples.fly.dev/simple)
+- [Demo](https://live-react-examples.fly.dev/simple) ([source](https://github.com/mrdotb/live_react_examples))
 - [HexDocs](https://hexdocs.pm/live_react)
 - [HexPackage](https://hex.pm/packages/live_react)
 - [Phoenix LiveView](https://github.com/phoenixframework/phoenix_live_view)
@@ -34,6 +34,7 @@ React inside Phoenix LiveView.
 ## Example
 
 Visit the [demo website](https://live-react-examples.fly.dev/simple) to see examples of what you can do with LiveReact.
+Its source lives in [mrdotb/live_react_examples](https://github.com/mrdotb/live_react_examples).
 
 You can also check out the [PhoenixAnalytics project](https://github.com/lalabuy948/PhoenixAnalytics) for a real-world example.
 
