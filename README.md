@@ -55,6 +55,15 @@ LiveReact builds on top of Phoenix LiveView to allow for easy client side state 
 
 see [Installation](/guides/installation.md)
 
+## Roadmap 🎯
+
+- [ ] `useLiveForm` - a utility to effortlessly use Ecto changesets & server-side validation, similar to HEEx
+
+The server side of this already exists: a `Phoenix.HTML.Form` passed as a prop
+is encoded with its values, its changeset errors keyed by field, and its
+validity — see [Props Diffing and Streams](/guides/props-diffing.md). What is
+missing is the React-side hook that binds those to inputs.
+
 ## Credits
 
 I was inspired by the following libraries:
