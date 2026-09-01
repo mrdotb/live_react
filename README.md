@@ -12,6 +12,9 @@ React inside Phoenix LiveView.
 ## Features
 
 - ⚡ **End-To-End Reactivity** with LiveView
+- 🪶 **Incremental Prop Updates** — only what changed is sent over the wire
+- 🌊 **Phoenix Streams** as props
+- 📝 **Form & Upload Encoding** — changeset errors and upload state, ready for React
 - 🔋 **Server-Side Rendered** (SSR) React
 - 🦄 **Tailwind** Support
 - 💀 **Dead View** Support
@@ -27,9 +30,11 @@ React inside Phoenix LiveView.
 - [HexPackage](https://hex.pm/packages/live_react)
 - [Phoenix LiveView](https://github.com/phoenixframework/phoenix_live_view)
 - [Installation](/guides/installation.md)
+- [Props Diffing and Streams](/guides/props-diffing.md)
 - [Deployment](/guides/deployment.md)
 - [Development](/guides/development.md)
 - [SSR](/guides/ssr.md)
+- [Upgrading to 2.0](/guides/upgrading-to-2.0.md)
 
 ## Example
 
@@ -49,11 +54,6 @@ LiveReact builds on top of Phoenix LiveView to allow for easy client side state 
 ## Installation
 
 see [Installation](/guides/installation.md)
-
-## Roadmap 🎯
-
-- [ ] `useLiveForm` - an utility to efforlessly use Ecto changesets & server-side validation, similar to HEEX
-- [ ] Add support for Phoenix streams as props
 
 ## Credits
 

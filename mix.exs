@@ -75,9 +75,11 @@ defmodule LiveReact.MixProject do
       extras: [
         "README.md",
         "guides/installation.md",
+        "guides/props-diffing.md",
         "guides/deployment.md",
         "guides/development.md",
         "guides/ssr.md",
+        "guides/upgrading-to-2.0.md",
         "CHANGELOG.md"
       ]
     ]

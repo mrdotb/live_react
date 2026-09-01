@@ -17,7 +17,7 @@ In production, we'll use [elixir-nodejs](https://github.com/revelrylabs/elixir-n
 ```elixir
 def deps do
   [
-    {:live_react, "~> 1.0.1"},
+    {:live_react, "~> 2.0"},
     {:nodejs, "~> 3.1.2"} # if you want to use SSR in production
   ]
 end
@@ -177,6 +177,19 @@ children = [
 ```elixir
 <.react name="Simple" />
 ```
+
+Every assign you pass becomes a prop. Maps, lists and primitives work as-is;
+structs need to derive `LiveReact.Encoder` so they declare which fields may
+reach the browser:
+
+```elixir
+defmodule MyApp.User do
+  @derive {LiveReact.Encoder, except: [:password_hash]}
+  defstruct [:id, :name, :email, :password_hash]
+end
+```
+
+See [Props Diffing and Streams](/guides/props-diffing.md) for details.
 
 You can also use the built-in Link component for LiveView navigation:
 

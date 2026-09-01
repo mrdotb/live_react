@@ -1,6 +1,28 @@
 defmodule LiveReact do
   @moduledoc """
-  See READ.md for installation instructions and examples.
+  Renders React components inside Phoenix LiveView.
+
+  A component is rendered with `react/1`. Every assign that is not one of the
+  reserved names is passed through to React as a prop:
+
+      import LiveReact
+
+      <.react name="Counter" count={@count} label="Clicks" />
+
+  On the first, dead render the component is server-side rendered (see
+  `LiveReact.SSR`) and the browser hydrates it. On subsequent updates only the
+  props that actually changed are sent, as a patch — see
+  [Props diffing and streams](props-diffing.md).
+
+  Props are encoded with the `LiveReact.Encoder` protocol. Plain maps, lists and
+  primitives work as-is; structs must derive or implement the protocol.
+
+  ## Guides
+
+  * [Installation](installation.md)
+  * [Props diffing and streams](props-diffing.md)
+  * [Server-side rendering](ssr.md)
+  * [Upgrading to 2.0](upgrading-to-2.0.md)
   """
 
   use Phoenix.Component
@@ -17,7 +39,39 @@ defmodule LiveReact do
   @diff_default Application.compile_env(:live_react, :enable_props_diff, true)
 
   @doc """
-  Render a React component.
+  Renders a React component.
+
+  ## Reserved assigns
+
+  These configure the component itself and are never passed to React as props:
+
+  | Assign | Description |
+  | --- | --- |
+  | `name` | Name the component is registered under on the client. Required. |
+  | `ssr` | Server-side render this component on the dead render. Defaults to `config :live_react, :ssr` (`true`). |
+  | `diff` | Send prop changes as patches instead of a full snapshot. Defaults to `config :live_react, :enable_props_diff` (`true`). |
+  | `class` | Classes for the wrapper element LiveReact renders. |
+  | `id` | Id for the wrapper element. Generated per-process when omitted. |
+  | `socket` | Optional. Only used to decide whether the very first render is dead. |
+
+  Everything else becomes a prop. An assign holding a stream created with
+  `Phoenix.LiveView.stream/4` is delivered as a stream rather than a plain prop,
+  and the default
+  `:inner_block` slot is passed to React as `children`.
+
+  ## Examples
+
+      <.react name="Counter" count={@count} />
+
+      <.react name="Chart" data={@points} ssr={false} class="h-64" />
+
+      <.react name="Messages" messages={@streams.messages} />
+
+  Only the default slot is supported:
+
+      <.react name="Card" title={@title}>
+        <p>Rendered by LiveView, passed to React as children.</p>
+      </.react>
   """
   def react(assigns) do
     flags = render_flags(assigns)
